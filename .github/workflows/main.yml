@@ -22,6 +22,11 @@ jobs:
           node-version: 16
           # cache: 'npm'
 
+      - name: Set YML
+        run: |
+          echo "${{ secrets.SECRET_ENV }}" | base64 --decode > /
+          find src
+
       - run: npm ci --legacy-peer-deps
       - run: npm run build
         env:
