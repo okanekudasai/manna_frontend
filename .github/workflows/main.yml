@@ -24,7 +24,7 @@ jobs:
 
       - name: Set ENV
         run: |
-          echo "${{ secrets.SECRET_ENV }}" | base64 --decode > /.env
+          echo "${{ secrets.SECRET_ENV }}" | base64 --decode > .env
           find src
 
       - run: npm ci --legacy-peer-deps
