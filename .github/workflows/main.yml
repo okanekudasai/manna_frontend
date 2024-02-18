@@ -35,6 +35,6 @@ jobs:
           port: ${{ secrets.REMOTE_SSH_PORT }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
           source: './dist'
-          target: "/home/ubuntu/deploy"
+          target: "/usr/share/nginx/html"
           strip_components: 2
       
