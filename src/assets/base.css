@@ -1,0 +1,17 @@
+@media (hover: hover) {
+    .hover_pointer:hover {
+        cursor: pointer
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.flex_horizontal_center {
+    justify-content: center;
+}
+
+.flex_vertical_center {
+    align-items: center;
+}
