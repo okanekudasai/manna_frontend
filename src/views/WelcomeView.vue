@@ -27,6 +27,9 @@ export default {
     created() {
         window.addEventListener('resize', this.setScreenSize);
     },
+    mounted() {
+        this.setScreenSize();
+    },
     methods: {
         login_button_click: () => {
             alert("fffff");
