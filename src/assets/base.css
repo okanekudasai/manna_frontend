@@ -15,3 +15,7 @@
 .flex_vertical_center {
     align-items: center;
 }
+
+.underline {
+    text-decoration: underline;
+}
