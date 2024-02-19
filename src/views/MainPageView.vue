@@ -1,34 +1,5 @@
 <template lang="">
     <div id="main_page_container" ref="main_page_container">
-        <div id="nav_bar">
-            <div class="flex flex_vertical_center" id="nav_bar_box">
-                <div class="flex">
-                    <div>
-                        공지사항
-                    </div>
-                    <!--ai로 관심분야가 비슷한 사람들의 소식을 업로드하고싶어요-->
-                    <div>
-                        피드
-                    </div>
-                    <!--상태메세지, 대화신청 등을 할 수 있어요-->
-                    <div>
-                        친구
-                    </div>
-                </div>
-                <div class="flex flex_vertical_center">
-                    <div class="hover_pointer" style="position:relative">
-                        <span class="material-symbols-outlined" style="font-size: 32px;">
-                            notifications
-                        </span>
-                        <div id="notification_badge">
-                            1
-                        </div>
-                    </div>
-                    <div class="hover_pointer" id="profile_container">
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="starting_container" class="flex flex_vertical_center flex_horizontal_center">
             <div id="starting_box">
                 <div id="logo_box">
@@ -47,23 +18,12 @@
         </div>
         <div id="information_container">
             <div id="information_box">
-                <div>
-                    sifjisejfse
-                </div>
-            </div>
-        </div>
-        <div id="footer_space"></div>
-        <div id="footer" class="flex flex_vertical_center flex_horizontal_center">
-            <div id="footer_box" class="flex">
-                <div class="flex flex_horizontal_center footer_content" style="flex-direction: column;">
-                    <a href='https://okane-on-cliff.tistory.com/238' target='_blank'><div class="underline hover_pointer">개인 정보 처리 방침</div></a>
-                    <div>대표자 : Okane</div>
-                    <div>Email : Okanekudasai6@gmail.com</div>
-                </div>
-                <div id="footer_box_vertical_line"></div>
-                <div class="flex flex_horizontal_center footer_content" style="flex-direction: column;">
-                    <div class="underline hover_pointer">About Mannayo</div>
-                    <div class="flex flex_vertical_center"><img src="@/img/git-hub-reverse.png" alt="" style="width: 20px; margin-right: 6px;"><span class="underline hover_pointer">Source Code</span></div>
+                <div id="recommend_people_container">
+                    <div id="recommend_people_box" class="flex flex_vertical_center">
+                        <div v-for="people in dummy_people" class="recommeded_people_card">
+                            {{people}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,9 +31,43 @@
             <span class="material-symbols-outlined" style="font-size: 28px">
                 group
             </span>
-            
-            <div id="waiting_people_badge" class="flex flex_vertical_center flex_horizontal_center" style="">
+            <div id="waiting_people_message">
+                <div style="margin-bottom: 4px;">1022명의 사람이 대화를</div>
+                <div>기다리고 있어요</div>
+            </div>
+            <div id="waiting_people_badge" class="flex flex_vertical_center flex_horizontal_center">
                 2
+            </div>
+        </div>
+        
+        <div id="profile_notification_container" class="flex flex_vertical_center">
+            <div class="hover_pointer" style="position:relative; margin-right: 20px;">
+                <span class="material-symbols-outlined" style="font-size: 32px;">
+                    notifications
+                </span>
+                <div id="notification_badge">
+                    1
+                </div>
+            </div>
+            <div class="hover_pointer" id="profile_container">
+            </div>
+        </div>
+        <div id="nav_bar_space"></div>
+        <div id="nav_bar">
+            <div class="flex flex_vertical_center" id="nav_bar_box">
+                <div class="flex">
+                    <div>
+                        홈
+                    </div>
+                    <!--ai로 관심분야가 비슷한 사람들의 소식을 업로드하고싶어요-->
+                    <div>
+                        피드
+                    </div>
+                    <!--상태메세지, 대화신청 등을 할 수 있어요-->
+                    <div>
+                        친구
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -84,6 +78,48 @@ export default {
         let vh = window.innerHeight * 0.01;
         console.log(this.$refs)
         this.$refs.main_page_container.style.setProperty('--vh', `${vh}px`);
+    },
+    data() {
+        return {
+            dummy_people: [
+                {
+                    email: 'lsss',
+                    profile: 'dsfefse',
+                    name: 'gogogogo',
+                    age: 16,
+                    sex: 'male',
+                    city: 'Seoul',
+                    nation: 'Korea',
+                    hobby: [
+                        '드라마', '그림', '유튜브'
+                    ]
+                },
+                {
+                    email: 'lsss',
+                    profile: 'dsfefse',
+                    name: 'gogogogo',
+                    age: 16,
+                    sex: 'male',
+                    city: 'Seoul',
+                    nation: 'Korea',
+                    hobby: [
+                        '드라마', '그림', '유튜브'
+                    ]
+                },
+                {
+                    email: 'lsss',
+                    profile: 'dsfefse',
+                    name: 'gogogogo',
+                    age: 16,
+                    sex: 'male',
+                    city: 'Seoul',
+                    nation: 'Korea',
+                    hobby: [
+                        '드라마', '그림', '유튜브'
+                    ]
+                }
+            ]
+        }
     },
     methods: {
         get_waiting_people_button_click: () => {
@@ -98,26 +134,11 @@ export default {
     #information_box {
         margin: 30px 10px;
     }
-    #footer_box {
-        flex-direction: column;
-    }
-    #footer_box_vertical_line {
-        display: none;
-    }
-    #footer_space {
-        height: 200px;
-    }
-    #footer {
-        height: 200px;
-    }
 }
-
 @media (min-width: 576px) {
-    #footer_space {
-        height: 150px;
-    }
-    #footer {
-        height: 150px;
+    #information_box {
+        width: 90%;
+        margin: 30px auto;
     }
 }
 
@@ -126,9 +147,15 @@ export default {
     position: relative;
 }
 
+#nav_bar_space {height: var(--nav-bar-height);}
+
 #nav_bar {
-    background-color: brown;
-    height: 60px;
+    background-color: rgb(244, 244, 244);
+    height: var(--nav-bar-height);
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    box-shadow: 0 -3px 8px 2px rgba(0, 0, 0, 0.08);
 }
 
 #nav_bar_box {
@@ -138,13 +165,20 @@ export default {
 
 }
 
+#profile_notification_container {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    border: dashed;
+}
+
 #notification_badge {
     width: 18px;
     height: 18px;
     background: blue;
     position: absolute;
     top: 0;
-    left: -2px;
+    right: -3px;
     border-radius: 10px;
     color: white;
     text-align: center;
@@ -152,8 +186,8 @@ export default {
 }
 
 #profile_container {
-    height: 38px;
-    width: 38px;
+    height: 45px;
+    width: 45px;
     background: white;
     border-radius: 40px;
 }
@@ -184,31 +218,10 @@ export default {
 
 #information_box {
     border: dashed;
-    max-width: 1000px;
-    width: 90%;
     height: 500px;
-    margin: 30px auto;
+    max-width: 1000px;
 }
 
-
-#footer {
-    width: 100%;
-    background-color: rgb(56, 56, 56);
-    position: absolute;
-    bottom: 0;
-}
-
-#footer_box_vertical_line {
-    width: 1px;
-    background-color: white;
-    height: 100px;
-    margin: 0 30px;
-}
-
-.footer_content div {
-    margin: 5px;
-    color: white;
-}
 
 #waiting_people_icon {
     width: 45px;
@@ -217,8 +230,21 @@ export default {
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 8px 2px rgba(0,0,0,0.2);
     position: fixed;
-    bottom: 12px;
-    right: 12px;
+    top: 12px;
+    left: 12px;
+}
+
+#waiting_people_message {
+    position:absolute;
+    width: 175px;
+    left: 60px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    font-size: 0.85em;
+    border-radius: 10px;
+    border: solid rgba(0, 0, 0, 0.091)
+    /* box-shadow: 0 2px 8px 2px rgba(0,0,0,0.2); */
 }
 
 #waiting_people_badge {
@@ -226,10 +252,15 @@ export default {
     font-size: 12px;
     width: 20px;
     height: 20px;
-    background-color: blue;
+    background-color: rgb(144, 144, 227);
     color: white;
     border-radius: 20px;
     top: 0;
     right: -5px;
 }
+
+.recommeded_people_card {
+    width: 200px
+}
+
 </style>

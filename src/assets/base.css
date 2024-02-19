@@ -1,3 +1,7 @@
+:root {
+    --nav-bar-height: 70px;
+}
+
 @media (hover: hover) {
     .hover_pointer:hover {
         cursor: pointer
