@@ -34,7 +34,7 @@ export default {
 <style scoped>
     #welcome_background {
         background: linear-gradient(180deg, rgba(132,179,213,1) 0%, rgba(206,247,255,1) 100%);
-        height: calc(var(--vh, 1vh) * 100);
+        height: 100vh;
         overflow: hidden;
     }
     #center_container {
