@@ -18,6 +18,8 @@
     </div>
 </template>
 <script>
+import { useUriStore } from '@/stores/uri'
+
 export default {
     data() {
         return {
@@ -38,6 +40,10 @@ export default {
             let vh = window.innerHeight * 0.01;
             this.$refs.welcome_background.style.setProperty('--vh', `${vh}px`);
         }
+    },
+    setup() {
+        const store = useUriStore();
+        store.setUri("welcomePage");
     }
 }
 </script>
