@@ -7,7 +7,7 @@
         </div>
         <div id="login_button_container">
             <div class="hover_pointer" id="login_button" @click="login_button_click">
-                로그인
+                로그인은 구글로그인만
             </div>
             <router-link to="/mainPage">
                 <div id="browsing_button">
