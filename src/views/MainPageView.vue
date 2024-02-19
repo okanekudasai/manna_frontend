@@ -25,7 +25,6 @@
                         </div>
                     </div>
                     <div class="hover_pointer" id="profile_container">
-                        
                     </div>
                 </div>
             </div>
@@ -43,16 +42,14 @@
                         모르는 사람과 대화하기
                     </div>
                 </div>
+                
             </div>
         </div>
         <div id="information_container">
             <div id="information_box">
-                <div id="waiting_information_box" class="flex flex_vertical_center" style="justify-content: end;">
-                    <div>현재 대화를 기다리는 사람이 10명 있어요.</div>
-                    <div id="get_waiting_people_button" class="hover_pointer" @click="get_waiting_people_button_click">둘러보기</div>
+                <div>
+                    sifjisejfse
                 </div>
-
-
             </div>
         </div>
         <div id="footer_space"></div>
@@ -68,6 +65,15 @@
                     <div class="underline hover_pointer">About Mannayo</div>
                     <div class="flex flex_vertical_center"><img src="@/img/git-hub-reverse.png" alt="" style="width: 20px; margin-right: 6px;"><span class="underline hover_pointer">Source Code</span></div>
                 </div>
+            </div>
+        </div>
+        <div id="waiting_people_icon" class="hover_pointer flex flex_vertical_center flex_horizontal_center">
+            <span class="material-symbols-outlined" style="font-size: 28px">
+                group
+            </span>
+            
+            <div id="waiting_people_badge" class="flex flex_vertical_center flex_horizontal_center" style="">
+                2
             </div>
         </div>
     </div>
@@ -91,6 +97,27 @@ export default {
 @media (max-width: 576px) { 
     #information_box {
         margin: 30px 10px;
+    }
+    #footer_box {
+        flex-direction: column;
+    }
+    #footer_box_vertical_line {
+        display: none;
+    }
+    #footer_space {
+        height: 200px;
+    }
+    #footer {
+        height: 200px;
+    }
+}
+
+@media (min-width: 576px) {
+    #footer_space {
+        height: 150px;
+    }
+    #footer {
+        height: 150px;
     }
 }
 
@@ -134,6 +161,7 @@ export default {
 #starting_container {
     height: 600px;
     background-color: bisque;
+    position: relative;
 }
 
 #logo_box {
@@ -162,13 +190,9 @@ export default {
     margin: 30px auto;
 }
 
-#footer_space {
-    height: 150px;
-}
 
 #footer {
     width: 100%;
-    height: 150px;
     background-color: rgb(56, 56, 56);
     position: absolute;
     bottom: 0;
@@ -186,11 +210,26 @@ export default {
     color: white;
 }
 
-#get_waiting_people_button {
-    margin-left: 15px;
-    padding: 10px 25px;
+#waiting_people_icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px 2px rgba(0,0,0,0.2);
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+}
+
+#waiting_people_badge {
+    position:absolute;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
     background-color: blue;
     color: white;
-    border-radius: 30px;
+    border-radius: 20px;
+    top: 0;
+    right: -5px;
 }
 </style>
