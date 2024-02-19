@@ -51,7 +51,7 @@ export default {
     #nav_bar_box {
         justify-content: space-between;
         height: 100%;
-        margin: 0 50px;
+        margin: 0 40px;
 
     }
     #notification_badge {

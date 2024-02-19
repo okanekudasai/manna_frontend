@@ -1,5 +1,5 @@
 <template>
-    <div id="welcome_background">
+    <div id="welcome_background" ref="welcome_background">
         <div id="center_container">
             <div id="logo_circle">
 
@@ -24,9 +24,16 @@ export default {
             inputed_id: "",
         };
     },
+    created() {
+        window.addEventListener('resize', this.setScreenSize);
+    },
     methods: {
         login_button_click: () => {
             alert("fffff");
+        },
+        setScreenSize() {
+            let vh = window.innerHeight * 0.01;
+            this.$refs.welcome_background.style.setProperty('--vh', `${vh}px`);
         }
     }
 }
@@ -34,7 +41,7 @@ export default {
 <style scoped>
     #welcome_background {
         background: linear-gradient(180deg, rgba(132,179,213,1) 0%, rgba(206,247,255,1) 100%);
-        height: 100vh;
+        height:calc(var(--vh, 1vh) * 100);
         overflow: hidden;
     }
     #center_container {
