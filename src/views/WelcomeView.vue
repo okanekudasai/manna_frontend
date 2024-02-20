@@ -24,6 +24,7 @@ export default {
     data() {
         return {
             inputed_id: "",
+            vh: 0,
         };
     },
     created() {
@@ -37,8 +38,7 @@ export default {
             alert("fffff");
         },
         setScreenSize() {
-            let vh = window.innerHeight * 0.01;
-            this.$refs.welcome_background.style.setProperty('--vh', `${vh}px`);
+            this.vh = window.innerHeight * 0.01 + 'px';
         }
     },
     setup() {
@@ -50,7 +50,7 @@ export default {
 <style scoped>
     #welcome_background {
         background: linear-gradient(180deg, rgba(132,179,213,1) 0%, rgba(206,247,255,1) 100%);
-        height:calc(var(--vh, 1vh) * 100);
+        height:calc(v-bind(vh) * 100);
         overflow: hidden;
     }
     #center_container {

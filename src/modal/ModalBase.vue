@@ -6,9 +6,17 @@
 
 <script>
 export default {
+    data() {
+        return {
+            vh:0,
+        }
+    },
+    created() {
+        window.addEventListener('resize', this.setScreenSize);
+    },
     mounted() {
-        let vh = window.innerHeight * 0.01;
-        this.$refs.modal_container.style.setProperty('--vh', `${vh}px`);
+        this.setScreenSize();
+
     },
     methods: {
         exit_modal() {
@@ -16,18 +24,22 @@ export default {
         },
         stop_propagation() {
             event.stopPropagation();
+        },
+        setScreenSize() {
+            this.vh = window.innerHeight * 0.01 + 'px';
         }
     }
 }
 </script>
 
 <style scoped>
+/* 모바일 */
 #modal_container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height:calc(var(--vh, 1vh) * 100);
+    height:calc(v-bind(vh) * 100);
     background: rgba(0, 0, 0, 0.671);
     z-index: 1000;
 }
