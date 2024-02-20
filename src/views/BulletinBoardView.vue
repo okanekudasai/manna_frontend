@@ -5,7 +5,13 @@
 </template>
 
 <script>
+import { useUriStore } from '@/stores/uri'
+
 export default {
+    setup() {
+        const store = useUriStore();
+        store.setUri("bulletinBoardPage");
+    }
 }
 </script>
 

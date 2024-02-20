@@ -3,7 +3,12 @@
         <div id="information_container">
             <div id="information_box">
                 <div id="recommend_people_container">
+                    <div>
+                        이 순간
+                    </div>
+                    <hr>
                     <div id="recommend_people_box" class="flex flex_vertical_center">
+
                         <div v-for="people in dummy_people" class="recommeded_people_card">
                             {{people}}
                         </div>
@@ -65,7 +70,7 @@ export default {
 /* 모바일 */
 @media (max-width: 576px) { 
     #information_box {
-        margin: 30px 10px;
+        margin: 30px 0;
     }
 }
 
