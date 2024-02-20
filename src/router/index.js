@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import WelcomeView from '@/views/WelcomeView.vue'
 import MainPageView from '@/views/MainPageView.vue'
 import BulletinBoardViewVue from '@/views/BulletinBoardView.vue'
+import ModalBase from '@/modal/ModalBase.vue'
+import StartDialogModal from '@/modal/StartDialogModal.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +16,19 @@ const router = createRouter({
     {
       path: '/mainPage',
       name: 'mainPage',
-      component: MainPageView
+      component: MainPageView,
+      children: [
+        {
+          path: 'modal',
+          component: ModalBase,
+          children: [
+            {
+              path: 'startDialog',
+              component: StartDialogModal,
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/bulletinBoard',

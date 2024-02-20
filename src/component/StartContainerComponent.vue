@@ -2,17 +2,20 @@
     <div>
         <div id="starting_container" class="flex flex_vertical_center flex_horizontal_center">
             <div id="starting_box">
+
                 <div id="logo_box">
                     
                 </div>
-                <div id="start_button" class="hover_pointer flex flex_vertical_center flex_horizontal_center">
-                    <span class="material-symbols-outlined" style="margin-right: 8px">
-                        forum
-                    </span>
-                    <div style="position: relative;">
-                        모르는 사람과 대화하기
+                <router-link to="/mainPage/modal/startDialog">
+                    <div id="start_button" class="hover_pointer flex flex_vertical_center flex_horizontal_center">
+                        <span class="material-symbols-outlined" style="margin-right: 8px">
+                            forum
+                        </span>
+                        <div style="position: relative;">
+                            모르는 사람과 대화하기
+                        </div>
                     </div>
-                </div>
+                </router-link>
                 
             </div>
         </div>

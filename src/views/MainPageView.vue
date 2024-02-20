@@ -4,6 +4,7 @@
         <InformationContainerComponent></InformationContainerComponent>
         <WaitingPeopleIconComponent></WaitingPeopleIconComponent>
         <ProfileNotificationContainerComponent></ProfileNotificationContainerComponent>
+        <router-view />
     </div>
 </template>
 <script>
