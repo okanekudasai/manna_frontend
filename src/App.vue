@@ -1,3 +1,7 @@
+<!--
+    홈화면에서 채팅, 게시판 말고 피드
+-->
+
 <template>
     <div id="app_container">
         <router-view />
