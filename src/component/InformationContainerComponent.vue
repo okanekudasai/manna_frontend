@@ -2,65 +2,23 @@
     <div>
         <div id="information_container">
             <div id="information_box">
-                <div id="recommend_people_container">
-                    <div>
-                        이 순간
-                    </div>
-                    <hr>
-                    <div id="recommend_people_box" class="flex flex_vertical_center">
-
-                        <div v-for="people in dummy_people" class="recommeded_people_card">
-                            {{people}}
-                        </div>
-                    </div>
-                </div>
+                <RecommendPeopleComponent />
             </div>
         </div>
     </div>
 </template>
 <script>
+import RecommendPeopleComponent from './RecommendPeopleComponent.vue';
+
 export default {
-    
+    components: {
+        RecommendPeopleComponent,
+    },
     data() {
         return {
-            dummy_people: [
-                {
-                    email: 'lsss',
-                    profile: 'dsfefse',
-                    name: 'gogogogo',
-                    age: 16,
-                    sex: 'male',
-                    city: 'Seoul',
-                    nation: 'Korea',
-                    hobby: [
-                        '드라마', '그림', '유튜브'
-                    ]
-                },
-                {
-                    email: 'lsss',
-                    profile: 'dsfefse',
-                    name: 'gogogogo',
-                    age: 16,
-                    sex: 'male',
-                    city: 'Seoul',
-                    nation: 'Korea',
-                    hobby: [
-                        '드라마', '그림', '유튜브'
-                    ]
-                },
-                {
-                    email: 'lsss',
-                    profile: 'dsfefse',
-                    name: 'gogogogo',
-                    age: 16,
-                    sex: 'male',
-                    city: 'Seoul',
-                    nation: 'Korea',
-                    hobby: [
-                        '드라마', '그림', '유튜브'
-                    ]
-                }
-            ]
+            recomment_people: {
+
+            }
         }
     },
 }

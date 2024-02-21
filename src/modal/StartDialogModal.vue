@@ -82,8 +82,8 @@
         </div>
         <div v-else id="waiting_box" style="width: 100%;">
             <div id="dialog_candidate_container" class="flex flex_vertical_center flex_horizontal_center">
-                <div style="width: 100%; margin: 0 12px;">
-                    <div v-if="dialog_candidate==null" class="flex flex_vertical_center">
+                <div style="width: 100%; margin: 0 14px;">
+                    <div v-if="dialog_candidate==null" class="flex flex_vertical_center flex_horizontal_center">
                         <img src="@/img/pending.svg" alt="" style="width: 30px; margin-right: 10px;">
                         <span>대화상대를 찾고 있어요!</span>
                     </div>
@@ -96,16 +96,18 @@
                                 <div>
                                     {{dialog_candidate.nickname}}
                                 </div>
-                                <div>
-                                    {{dialog_candidate.age}}
+                                <div class="flex" style="flex-wrap: wrap;">
+                                    <div>
+                                        {{dialog_candidate.age}}
+                                    </div>
+                                    <div>
+                                        {{dialog_candidate.sex}}
+                                    </div>
+                                    <div>
+                                        {{dialog_candidate.nation}}
+                                    </div>
                                 </div>
-                                <div>
-                                    {{dialog_candidate.sex}}
-                                </div>
-                                <div>
-                                    {{dialog_candidate.nation}}
-                                </div>
-                                <div>
+                                <div class="flex" style="flex-wrap: wrap;">
                                     <div v-for="h in dialog_candidate.hobby">
                                         {{h}}
                                     </div>
@@ -113,7 +115,7 @@
                             </div>
                         </div> 
                         <div style="text-align: center; margin-bottom: 5px;">
-                            남은 시간 : {{candidate_timer}}초
+                            남은 시간 {{candidate_timer}}초
                         </div>
                         <div style="width: 100%; height: 12px; border-radius:100px; background-color: gray; margin-bottom: 24px;">
                             <div style="width: 60%; height: 100%; border-radius:100px; background-color: blue"></div>
@@ -139,24 +141,25 @@
 export default {
     data() {
         return {
-            started: true,
+            started: false,
             selecting: 0,
             sex: 0,
             dialog_type: 0,
             content_width: '500px',
-            dialog_candidate: {
-                nickname: "닉네임",
-                profile_url: "https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202303/13/sbsnoriter/20230313145738118regu.jpg",
-                age: 24,
-                sex: "female",
-                city: "daegu",
-                nation: "kr",
-                hobby: [
-                    "유튜브",
-                    "운동",
-                    "그림"
-                ]
-            },
+            dialog_candidate: null,
+            // dialog_candidate: {
+            //     nickname: "전지현",
+            //     profile_url: "https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202303/13/sbsnoriter/20230313145738118regu.jpg",
+            //     age: 24,
+            //     sex: "female",
+            //     city: "daegu",
+            //     nation: "kr",
+            //     hobby: [
+            //         "유튜브",
+            //         "운동",
+            //         "그림"
+            //     ]
+            // },
             candidate_timer: 7,
 
             dialog_candidate_q: [
@@ -279,12 +282,18 @@ export default {
     .people_option_card > img {
         width: 60px;
     }
+    #dialog_candidate_profile {
+        width: 140px;
+    }
 }
 
 /* PC */
 @media (min-width: 576px) { 
     .people_option_card > img {
         width: 80px;
+    }
+    #dialog_candidate_profile {
+        width: 180px;
     }
 }
 .people_option_card > div {
@@ -382,11 +391,9 @@ export default {
     margin: 0 auto;
     border-radius: 20px;
     box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.119);
-    background-color: rgb(246, 246, 246);
 }
 
 #dialog_candidate_profile {
-    width: 180px;
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 180px;
