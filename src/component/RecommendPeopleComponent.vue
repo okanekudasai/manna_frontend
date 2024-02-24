@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div style="position: absolute; right: 0; top:0; height: 100%; width: 50px; background-color: black;">
+            <div id="gradient_box" style="">
                 
             </div>
         </div>
@@ -152,6 +152,22 @@ export default {
 /* #content_container {
     padding: 10px;
 } */
+
+/* 모바일 */
+@media (max-width: 576px) {
+    .person_card {
+        width: 160px;
+        height: 240px;
+    }
+}
+
+@media (min-width: 576px) {
+    .person_card {
+        width: 200px;
+        height: 300px;
+    }
+}
+
 #person_card_box {
     padding: 14px;
     width: 100%;
@@ -161,8 +177,6 @@ export default {
 }
 .person_card {
     flex: 0 0 auto;
-    width: 200px;
-    height: 300px;
     margin-right: 30px;
     border-radius: 30px;
     overflow: hidden;
@@ -184,5 +198,12 @@ export default {
     color: white;
     padding: 4px 8px;
     border-radius: 50px;
+}
+#gradient_box {
+    position: absolute;
+    right: 0; top:0;
+    height: 100%;
+    width: 50px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.685));
 }
 </style>
