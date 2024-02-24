@@ -6,7 +6,7 @@
             </div>
         </div>
         <div id="login_button_container">
-            <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=http://localhost:5173/mainPage">
+            <a ref="google_login_button">
                 <div class="hover_pointer" id="login_button" @click="login_button_click">
                     로그인은 구글로그인만
                 </div>
@@ -34,7 +34,9 @@ export default {
     },
     mounted() {
         this.setScreenSize();
-    },
+        console.log(`https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=${import.meta.env.VITE_API_SERVER}/mainPage`);
+        this.$refs.google_login_button.href=`https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=${import.meta.env.VITE_API_SERVER}/mainPage`;
+    }, 
     methods: {
         login_button_click: () => {
             alert("fffff");
