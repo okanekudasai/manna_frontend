@@ -8,7 +8,7 @@
         <div id="login_button_container">
             <a ref="google_login_button">
                 <div class="hover_pointer" id="login_button" @click="login_button_click">
-                    로그인은 구글로그인만
+                    로그인은 구글로그인만!
                 </div>
             </a>
             <router-link to="/mainPage">
