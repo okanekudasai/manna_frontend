@@ -43,7 +43,6 @@ export default {
 }
 
 #information_box {
-    border: dashed;
     max-width: 1000px;
 }
 

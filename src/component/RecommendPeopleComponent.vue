@@ -3,32 +3,44 @@
         <div>
             취미가 비슷한 사람
         </div>
-        <div id="person_card_box" ref="person_card_box" class="flex">
-            <div v-for="person in recomment_people" class="person_card">
-                <div style="position: relative;">
-                    <img :src="person.profile_url" alt="" class="person_card_profile">
-                    <div style="position: absolute; bottom: 0; width: 100%; height: 50%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.687))">
-                        
+        <div style="position:relative;">
+            <div id="person_card_box" ref="person_card_box" class="flex">
+                <div v-for="(person, index) in recomment_people" class="person_card" :key="index">
+                    <div style="position: relative;">
+                        <img :src="person.profile_url" alt="" class="person_card_profile">
+                        <div style="position: absolute; bottom: 0; width: 100%; height: 50%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.687))"></div>
+                    </div>
+                    <div class="flex flex_vertical_center">
+                        <div style="font-weight: 900;">{{ person.nickname }}</div>
+                        <router-link :to="`/profile/${person.person_id}`">
+                            <div class="visit_profile_box">프로필 방문 &gt;</div>
+                        </router-link>
+                    </div>
+                    <div class="flex">
+                        <div>
+                            {{ person.age }}
+                        </div>
+                        <div>
+                            <img class="sex_icon" v-if="person.sex=='male'" src="@/img/male.svg" alt="">
+                            <img class="sex_icon" v-else-if="person.sex=='female'" src="@/img/female.svg" alt="">
+                        </div>
+                        <div>
+                            {{ person.nation }}
+                        </div>
+                    </div>
+                    <div class="flex flex_vertical_center">
+                        <img src="@/img/hobby.svg" alt="" style="width: 24px;">
+                        <div v-for="(h,index) in person.hobby" :key="index">
+                            {{ h }}
+                        </div>
+                    </div>
+                    <div>
+                        쪽지 보내기
                     </div>
                 </div>
-                <div>
-                    {{ person.nickname }}
-                </div>
-                <div>
-                    {{ person.age }}
-                </div>
-                <div>
-                    {{ person.sex }}
-                </div>
-                <div>
-                    {{ person.nation }}
-                </div>
-                <div v-for="h in person.hobby">
-                    {{ h }}
-                </div>
-                <div>
-                    쪽지 보내기
-                </div>
+            </div>
+            <div style="position: absolute; right: 0; top:0; height: 100%; width: 50px; background-color: black;">
+                
             </div>
         </div>
     </div>
@@ -40,10 +52,11 @@ export default {
         return {
             recomment_people: [
                 {
+                    person_id: 123,
                     nickname: "닉네임",
                     profile_url: "https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202303/13/sbsnoriter/20230313145738118regu.jpg",
                     age: 24,
-                    sex: "female",
+                    sex: "male",
                     city: "daegu",
                     nation: "kr",
                     hobby: [
@@ -136,11 +149,11 @@ export default {
 </script>
 
 <style scoped>
-#content_container {
+/* #content_container {
     padding: 10px;
-}
+} */
 #person_card_box {
-    padding-bottom: 10px;
+    padding: 14px;
     width: 100%;
     overflow-x: auto;
     -ms-overflow-style: none;  /*IE, Edge*/
@@ -159,5 +172,17 @@ export default {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
+}
+
+.sex_icon {
+    width: 20px;
+}
+
+.visit_profile_box {
+    font-size: 12px;
+    background: rgb(130, 130, 228);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 50px;
 }
 </style>

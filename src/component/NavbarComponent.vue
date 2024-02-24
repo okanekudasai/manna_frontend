@@ -1,5 +1,5 @@
 <template lang="">
-    <div :class="{ hide: store.uri=='welcomePage'}">
+    <div :class="{ hide: store.uri=='welcomePage' }">
         <div id="nav_bar_space"></div>
         <div id="nav_bar">
             <div class="flex flex_vertical_center flex_horizontal_center" id="nav_bar_box">
@@ -27,11 +27,13 @@
                         <div>게시판</div>
                     </div>
                 </router-link>
-                <div class="nav_card">
-                    <div v-if="store.uri == 'noticePage'"><img src="@/img/notice_selected.svg" alt="" class="selected_icon"></div>
-                    <div v-else><img src="@/img/notice_not_selected.svg" alt="" class="not_selected_icon"></div>
-                    <div>공지</div>
-                </div>
+                <router-link to="/noticePage">
+                    <div class="nav_card">
+                        <div v-if="store.uri == 'noticePage'"><img src="@/img/notice_selected.svg" alt="" class="selected_icon"></div>
+                        <div v-else><img src="@/img/notice_not_selected.svg" alt="" class="not_selected_icon"></div>
+                        <div>공지</div>
+                    </div>
+                </router-link>
             </div>
         </div>
     </div>

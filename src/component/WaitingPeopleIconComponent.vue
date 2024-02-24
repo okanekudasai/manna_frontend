@@ -1,9 +1,7 @@
 <template lang="">
     <div>
         <div id="waiting_people_icon" class="hover_pointer flex flex_vertical_center flex_horizontal_center" @click="get_waiting_people_button_click">
-            <span class="material-symbols-outlined" style="font-size: 28px">
-                group
-            </span>
+            <img src="@/img/group.svg" alt="" style="width: 30px;">
             <div id="waiting_people_message">
                 <div style="margin-bottom: 4px;">1022명의 사람이 대화를</div>
                 <div>기다리고 있어요</div>

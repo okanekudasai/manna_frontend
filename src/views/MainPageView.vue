@@ -3,7 +3,6 @@
         <StartContainerComponent></StartContainerComponent>
         <InformationContainerComponent></InformationContainerComponent>
         <WaitingPeopleIconComponent></WaitingPeopleIconComponent>
-        <ProfileNotificationContainerComponent></ProfileNotificationContainerComponent>
         <router-view />
     </div>
 </template>
@@ -11,7 +10,6 @@
 import StartContainerComponent from '@/component/StartContainerComponent.vue';
 import InformationContainerComponent from '@/component/InformationContainerComponent.vue';
 import WaitingPeopleIconComponent from '@/component/WaitingPeopleIconComponent.vue';
-import ProfileNotificationContainerComponent from '@/component/ProfileNotificationContainerComponent.vue';
 
 import { useUriStore } from '@/stores/uri'
 
@@ -20,7 +18,6 @@ export default {
         StartContainerComponent,
         InformationContainerComponent,
         WaitingPeopleIconComponent,
-        ProfileNotificationContainerComponent,
     },
     data() {
         return {
