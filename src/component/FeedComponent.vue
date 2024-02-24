@@ -1,7 +1,7 @@
 <template>
     <div>
         <span>피드</span>
-        <div v-for="feed in feed_q">
+        <div v-for="feed in feed_q" :key="feed.article_id">
             <div id="profile_box" class="flex flex_vertical_center">
                 <div>
                     <img :src="feed.writer_profile_url" alt="" style="width: 40px; aspect-ratio: 1/1; object-fit: cover; border-radius: 40px;">
