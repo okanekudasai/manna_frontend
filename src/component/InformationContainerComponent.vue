@@ -3,16 +3,19 @@
         <div id="information_container">
             <div id="information_box">
                 <RecommendPeopleComponent />
+                <FeedComponent />
             </div>
         </div>
     </div>
 </template>
 <script>
 import RecommendPeopleComponent from './RecommendPeopleComponent.vue';
+import FeedComponent from './FeedComponent.vue';
 
 export default {
     components: {
         RecommendPeopleComponent,
+        FeedComponent,
     },
     data() {
         return {
@@ -41,7 +44,6 @@ export default {
 
 #information_box {
     border: dashed;
-    height: 500px;
     max-width: 1000px;
 }
 
