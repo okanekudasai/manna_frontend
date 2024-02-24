@@ -6,9 +6,11 @@
             </div>
         </div>
         <div id="login_button_container">
-            <div class="hover_pointer" id="login_button" @click="login_button_click">
-                로그인은 글로그인만
-            </div>
+            <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=http://localhost:5173/mainPage">
+                <div class="hover_pointer" id="login_button" @click="login_button_click">
+                    로그인은 구글로그인만
+                </div>
+            </a>
             <router-link to="/mainPage">
                 <div id="browsing_button">
                     <span class="hover_pointer">둘러보기</span>
