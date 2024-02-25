@@ -18,8 +18,10 @@ export default {
         NavbarComponent,
         ProfileNotificationContainerComponent,
     },
-    created() {
-        console.log(import.meta.env.VITE_API_SERVER);
+    async created() {
+        console.log(`${import.meta.env.VITE_API_SERVER}/test/hello`);
+        let test = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/test/hello`).then(res => res.data);
+        console.log(test);
     },
 }
 </script>
