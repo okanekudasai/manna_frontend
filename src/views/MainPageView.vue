@@ -34,8 +34,16 @@ export default {
             console.log("뭔가 있음! 코드를 서버로 보낼게요");
             let token = await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/takeCodeFromClient`, {code: value, redirect_url: `${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`}, header).then(res => res.data);
             console.log(token);
-            let user_info = await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/getUserInfoFromToken`, token, header).then(res => res.data);
+            let user_info;
+            await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/getUserInfoFromToken`, token, header).then(res => {
+                if (res.data == 'expired') {
+                    // 리프레시토큰 조차 만료되었다는 뜻
+                    // 하지만 여기서는 code를 통해 들어온 곳이니 만료되어있을리는 없음
+                }
+                else user_info = res.data;
+            });
             console.log(user_info);
+            
         } else {
             console.log("암것도 없음");
         }
