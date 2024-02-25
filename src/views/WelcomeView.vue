@@ -36,7 +36,8 @@ export default {
         this.setScreenSize();
 
         //prompt=consent 쿼리는 최초 로그인 이후 같은 계정으로 로그인해도 해당계정에서 동의를 눌러줄거냐 여부를 결정한다. 이게있어야 refresh토큰을 얻을 수가 있는데,, 사실 최초 1회시 정보만 받고 그 이후에는 우리서버에서 토큰을 만들어 줘야 되기 때문에 실질적으로 사용자 경험에 악영향이다. 따라서 로그인 시 정보만 적용하고 토큰은 자체토큰을 발행하는 방향으로 바꾸는 것이 좋다.
-        this.$refs.google_login_button.href=`https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&access_type=offline&include_granted_scopes=true&prompt=consent&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`;
+        // this.$refs.google_login_button.href=`https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&access_type=offline&include_granted_scopes=true&prompt=consent&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`;
+        this.$refs.google_login_button.href=`https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&include_granted_scopes=true&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`;
     }, 
     methods: {
         setScreenSize() {
