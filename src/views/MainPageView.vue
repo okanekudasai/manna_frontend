@@ -34,6 +34,10 @@ export default {
             console.log("뭔가 있음! 코드를 서버로 보낼게요");
             let user_info = await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/google/takeUserInfoWithCode`, {code: value, redirect_url: `${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`}, header).then(res => res.data);
             console.log(user_info);
+
+            // 받아온 유저 정보를 브라우저에 저장시켜요 
+
+
             // let user_info;
             // await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/getUserInfoFromToken`, token, header).then(res => {
             //     if (res.data == 'expired') {
