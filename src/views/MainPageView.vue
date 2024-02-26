@@ -7,16 +7,13 @@
     </div>
 </template>
 
-<script setup>
-import { useMyInfoStore } from '@/stores/myInfo'
-const myInfoStore = useMyInfoStore();
-</script>
-
 <script>
 import StartContainerComponent from '@/component/StartContainerComponent.vue';
 import InformationContainerComponent from '@/component/InformationContainerComponent.vue';
 import WaitingPeopleIconComponent from '@/component/WaitingPeopleIconComponent.vue';
 
+import * as httpUtil from '@/util/httpUtil';
+import { useMyInfoStore } from '@/stores/myInfo'
 import { useUriStore } from '@/stores/uri'
 
 export default {
@@ -28,6 +25,7 @@ export default {
     data() {
         return {
             state: "mainPage",
+            myInfoStore: useMyInfoStore()
         }
     },
     created() {
@@ -48,8 +46,11 @@ export default {
                     console.log("잘못된 접근");
                 } else {
                     console.log(token);
-                    // 유저 정보를 Store에 저장;
-                    myInfoStore.setMyInfo();
+                    let user_info = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/token/getUserInfo`).then(res => res.data);
+                    console.log(user_info);
+                
+                    this.myInfoStore.myInfo = user_info
+                    // myInfoStore.setMyInfo(this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/getUserInfo`, {header: {Authorization: ""}}));
                 }
 
                 // 받아온 유저 정보를 브라우저에 저장시켜요 
@@ -81,7 +82,7 @@ export default {
     },
     setup() {
         const store = useUriStore();
-        store.setUri("mainPage");
+        store.uri = "mainPage";
     }
 }
 </script>
