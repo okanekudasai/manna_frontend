@@ -5,7 +5,7 @@
         </div>
         <div style="position:relative;">
             <div id="person_card_box" ref="person_card_box" class="flex">
-                <div v-for="(person, index) in recomment_people" class="person_card" :key="index">
+                <div v-for="(person, index) in recommend_people" class="person_card" :key="index">
                     <div style="position: relative;">
                         <img :src="person.profile_url" alt="" class="person_card_profile">
                         <div
@@ -40,9 +40,19 @@
                         쪽지 보내기111
                     </div>
                 </div>
+                <div v-if="recommend_people_loading" class="flex flex_vertical_center">
+                    <img src="@/img/pending.svg" alt="" style="width: 30px; margin-right: 20px;">
+                </div>
             </div>
-            <div id="gradient_box" class="flex flex_vertical_center flex_horizontal_center" @click="smoothScroll()">
-                <img src="@/img/right_arrow_circle.svg" alt="">
+            <div class="arrow_box left_arrow flex flex_vertical_center flex_horizontal_center">
+                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center arrow_inner_box" @click="smoothScroll(-1)">
+                    <span>&lt;</span>
+                </div>
+            </div>
+            <div class="arrow_box right_arrow flex flex_vertical_center flex_horizontal_center">
+                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center arrow_inner_box" @click="smoothScroll(1)">
+                    <span>&gt;</span>
+                </div>
             </div>
         </div>
     </div>
@@ -52,7 +62,8 @@
 export default {
     data() {
         return {
-            recomment_people: [
+            recommend_people_loading: false,
+            recommend_people: [
                 {
                     person_id: 123,
                     nickname: "닉네임",
@@ -149,6 +160,7 @@ export default {
             const currentScrollLeft = personCardBox.scrollLeft;
             const maxScrollLeft = personCardBox.scrollWidth - personCardBox.clientWidth;
 
+            // console.log(currentScrollLeft);
             if (currentScrollLeft + 1>= maxScrollLeft) {
                 this.onScrollEnd();
             }
@@ -163,14 +175,14 @@ export default {
             this.$refs.person_card_box.scrollLeft -= delta * 40;
             event.preventDefault();
         },
-        smoothScroll() {
+        smoothScroll(e) {
             const duration = 500; // 애니메이션 기간 (밀리초)
 
-            this.smoothScrollTo(this.$refs.person_card_box, duration);
+            this.smoothScrollTo(this.$refs.person_card_box, duration, e);
         },
-        smoothScrollTo(element, duration) {
+        smoothScrollTo(element, duration, e) {
             const startScrollLeft = element.scrollLeft;
-            const targetScrollLeft = startScrollLeft + 500; // 목표 scrollLeft 값
+            const targetScrollLeft = startScrollLeft + 500 * e; // 목표 scrollLeft 값
             const startTime = performance.now();
 
             function scrollAnimation(currentTime) {
@@ -191,19 +203,30 @@ export default {
 
             requestAnimationFrame(scrollAnimation);
         },
-        onScrollEnd() {
-            console.log("끝");
+        async onScrollEnd() {
+            if (this.recommend_people_loading) return;
+            this.recommend_people_loading = true;
+            let res = await new Promise((resolve, reject) => {setTimeout(() => {
+                resolve(1);
+            },1000)})
+            console.log(res);
+            this.$refs.person_card_box.scrollLeft -= 70;
+            this.recommend_people_loading = false;
         }
     }
 }
 </script>
 
 <style scoped>
+
 /* 모바일 */
 @media (max-width: 576px) {
     .person_card {
         width: 160px;
         height: 240px;
+    }
+    .arrow_box {
+        display: none;
     }
 }
 
@@ -216,6 +239,7 @@ export default {
 
 #person_card_box {
     padding: 14px;
+    padding-right: 0;
     width: 100%;
     overflow-x: auto;
     -ms-overflow-style: none;
@@ -250,12 +274,23 @@ export default {
     border-radius: 50px;
 }
 
-#gradient_box {
+.arrow_box {
     position: absolute;
-    right: 0;
     top: 0;
     height: 100%;
-    width: 50px;
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.685));
+}
+.left_arrow {
+    left: -20px;
+}
+.right_arrow {
+    right: -20px;
+}
+
+.arrow_inner_box {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: rgba(244, 244, 244, 0.518);
+    box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.194);
 }
 </style>

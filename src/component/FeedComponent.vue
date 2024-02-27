@@ -54,6 +54,9 @@
                 </div>
             </div>
         </div>
+        <div v-if="data_loading" style="text-align: center; margin: 30px 0;">
+            <img src="@/img/pending.svg" alt="" style="width: 30px;">
+        </div>
     </div>
 </template>
 
@@ -131,13 +134,19 @@ export default {
         handleScroll() {
             const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
 
+            // console.log(window.innerHeight + window.scrollY, document.body.offsetHeight )
             if (isAtBottom && !this.data_loading) {
                 this.scrollToBottom();
             }
         },
-        scrollToBottom() {
+        async scrollToBottom() {
             this.data_loading = true;
-            console.log("더 가져오기")
+            let res = await new Promise((resolve, reject) => {setTimeout(() => {
+                resolve(1);
+            },2000)})
+            console.log(res);
+            window.scrollBy(0, -80);
+            this.data_loading = false;
         },
     }
 };
