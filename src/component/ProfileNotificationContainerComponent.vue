@@ -1,17 +1,26 @@
 <template>
     <div :class="{ hide: uriStore.uri=='welcomePage' }">
-        <div id="profile_notification_container" class="flex flex_vertical_center">
-            <div class="hover_pointer" style="position:relative; margin-right: 20px;">
-                <img src="@/img/bell.svg" alt="" style="width: 32px;">
-                <div id="notification_badge">
-                    1
+        <div id="profile_notification_container">
+            <div class="flex flex_vertical_center">
+                <div class="hover_pointer" style="position:relative; margin-right: 20px;">
+                    <img src="@/img/bell.svg" alt="" style="width: 32px;">
+                    <div id="notification_badge">
+                        1
+                    </div>
                 </div>
-                <NotificationContentComponent />
+                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center" id="profile_container" style="overflow: hidden">
+                    <div v-if="!myInfoStore.pending" style="height: 100%;">
+                        <img :src="myInfoStore.myInfo.profile_url" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div v-else>
+                        펜딩
+                    </div>
+                    
+                </div>
             </div>
-            <div class="hover_pointer" id="profile_container" style="overflow: hidden">
-                <img :src="myInfoStore.myInfo.profile_url" alt="" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;">
-                
-                <ProfileMenuComponent class="profile_menu"/>
+            <div style="position: relative; top: 10px;">
+                <!-- <NotificationContentComponent /> -->
+                <ProfileMenuComponent class="profile_notification_context"/>
             </div>
         </div>
     </div>
@@ -69,8 +78,8 @@ export default {
     box-shadow: 0 2px 4px 1px rgba(0,0,0,0.1);
 }
 
-.profile_menu {
-    border: dashed;
+.profile_notification_context {
+    box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.18);
 }
 </style>
 

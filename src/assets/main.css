@@ -5,3 +5,15 @@ a {
     color: black;
 }
 input:focus {outline:none;}
+
+html {
+    /* cursor: default; */
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+label {
+    cursor: inherit;
+}

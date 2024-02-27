@@ -6,23 +6,26 @@
                 <div id="logo_box">
                     
                 </div>
-                <router-link to="/mainPage/modal/startDialog">
-                    <div id="start_button" class="hover_pointer flex flex_vertical_center flex_horizontal_center">
-                        <span class="material-symbols-outlined" style="margin-right: 8px">
-                            forum
-                        </span>
-                        <div style="position: relative;">
-                            모르는 사람과 대화하기
-                        </div>
-                    </div>
-                </router-link>
                 
+                <div id="start_button" class="hover_pointer flex flex_vertical_center flex_horizontal_center" @click=open_modal>
+                    <span class="material-symbols-outlined" style="margin-right: 8px">
+                        forum
+                    </span>
+                    <div style="position: relative;">
+                        모르는 사람과 대화하기
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
 export default {
+    methods: {
+        open_modal() {
+            this.$router.push("/mainPage/modal/startDialog");
+        }
+    }
 }
 </script>
 <style scoped>
@@ -49,5 +52,6 @@ export default {
     color: white;
     background: linear-gradient(173deg, rgba(52,67,180,1) 0%, rgba(126,120,219,1) 100%);
 }
+
 
 </style>

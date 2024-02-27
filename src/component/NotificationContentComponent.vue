@@ -1,6 +1,6 @@
 <template>
     <div id="notification_content_container">
-        sfefefes
+        sfefefes!!!
     </div>
 </template>
 
@@ -12,6 +12,7 @@ export default {
 <style scoped>
 #notification_content_container {
     position: absolute;
+    top: 0;
     right: 0;
 }
 </style>
