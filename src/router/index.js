@@ -6,6 +6,7 @@ import ModalBase from '@/modal/ModalBase.vue'
 import StartDialogModal from '@/modal/StartDialogModal.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import NoticeView from '@/views/NoticeView.vue'
+import EditProfileView from '@/views/EditProfileVie.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,6 +47,11 @@ const router = createRouter({
             path: '/noticePage',
             name: 'noticePage',
             component: NoticeView,
+        },
+        {
+            path: '/editProfilePage',
+            name: 'editProfilePage',
+            component: EditProfileView,
         }
     ]
 })

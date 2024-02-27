@@ -4,17 +4,20 @@
 
 <template>
     <div id="app_container">
-        <router-view />
+        <LoadingView></LoadingView>
+        <router-view></router-view>
         <NavbarComponent></NavbarComponent>
         <ProfileNotificationContainerComponent></ProfileNotificationContainerComponent>
     </div>
 </template>
 <script>
+import LoadingView from './views/LoadingView.vue';
 import NavbarComponent from '@/component/NavbarComponent.vue'
 import ProfileNotificationContainerComponent from '@/component/ProfileNotificationContainerComponent.vue';
 
 export default {
     components: {
+        LoadingView,
         NavbarComponent,
         ProfileNotificationContainerComponent,
     },

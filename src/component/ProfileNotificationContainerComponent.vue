@@ -1,26 +1,25 @@
 <template>
     <div :class="{ hide: uriStore.uri=='welcomePage' }">
-        <div id="profile_notification_container">
+        <div id="profile_notification_container" style="z-index: 1000;">
             <div class="flex flex_vertical_center">
-                <div class="hover_pointer" style="position:relative; margin-right: 20px;">
+                <div class="hover_pointer" style="position:relative; margin-right: 20px;" @click="toggle_notification_content()">
                     <img src="@/img/bell.svg" alt="" style="width: 32px;">
                     <div id="notification_badge">
                         1
                     </div>
                 </div>
-                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center" id="profile_container" style="overflow: hidden">
+                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center" id="profile_container" style="overflow: hidden" @click="toggle_profile_menu()">
                     <div v-if="!myInfoStore.pending" style="height: 100%;">
                         <img :src="myInfoStore.myInfo.profile_url" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <div v-else>
-                        펜딩
-                    </div>
-                    
                 </div>
             </div>
-            <div style="position: relative; top: 10px;">
-                <!-- <NotificationContentComponent /> -->
-                <ProfileMenuComponent class="profile_notification_context"/>
+            <div :class="{hide: profile_menu_hidden && notification_content_hidden}">
+                <div style="position: fixed; top:0; left:0; width: 100vw; height: 100vh; z-index: -1;" @click="close_menu()"></div>
+                <div style="position: relative; top: 10px;">
+                    <NotificationContentComponent class="profile_notification_context" :class="{hide: notification_content_hidden}" />
+                    <ProfileMenuComponent class="profile_notification_context" :class="{hide: profile_menu_hidden}"/>
+                </div>
             </div>
         </div>
     </div>
@@ -45,8 +44,28 @@ export default {
             uriStore: useUriStore(),
             myInfoStore: useMyInfoStore(),
             profile_height: "45px",
+            profile_menu_hidden: true,
+            notification_content_hidden: true,
         }
     },
+    methods: {
+        toggle_profile_menu() {
+            this.profile_menu_hidden = !this.profile_menu_hidden;
+            if (!this.profile_menu_hidden) {
+                this.notification_content_hidden = true;
+            }
+        },
+        toggle_notification_content() {
+            this.notification_content_hidden = !this.notification_content_hidden;
+            if (!this.notification_content_hidden) {
+                this.profile_menu_hidden = true;
+            }
+        },
+        close_menu() {
+            this.profile_menu_hidden = true;
+            this.notification_content_hidden = true;
+        }
+    },  
 }
 </script>
 <style scoped>

@@ -10,7 +10,9 @@
                     </div>
                     <hr>
                     <div>
-                        <span class="hover_pointer" @click="edit_profile()">프로필 수정</span>
+                        <router-link to="/editProfilePage">
+                            <span class="hover_pointer" @click="edit_profile()">프로필 수정</span>
+                        </router-link>
                     </div>
                     <hr>
                     <div>
@@ -19,11 +21,11 @@
                 </ul>
             </div>
             <div v-else>
-                구글 로그인
+                <a :href="google_login_url">구글로그인</a>
             </div>
         </div>
         <div v-else>
-            펜딩중
+            <img src="@/img/spinning1.svg" alt="" style="width: 50px; object-fit: cover;">
         </div>
     </div>
 </template>
@@ -36,7 +38,8 @@ export default {
     data() {
         return {
             keep_login_pending: false,
-            myInfoStore: useMyInfoStore()
+            myInfoStore: useMyInfoStore(),
+            google_login_url: `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&include_granted_scopes=true&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`
         }
     },
     created() {
@@ -44,8 +47,10 @@ export default {
         if (httpUtil.getCookie("keep_login") == "") {
             document.cookie = `keep_login=${encodeURIComponent('false')}; max-age=31536000;`;
         } else {
-            this.myInfoStore.keepLogin = Boolean(check);
+            this.myInfoStore.keepLogin = check;
         }
+    },
+    mounted() {
     },
     methods: {
         keep_login_button_click() {
@@ -59,7 +64,12 @@ export default {
         },
         logout() {
             this.myInfoStore.myInfo = {};
-            this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`).then(res => res.data);
+            this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`).then(res => {
+                if (res.data == "OK") {
+                    this.$router.push("/mainPage");
+                }
+            });
+
         }
     }
 }

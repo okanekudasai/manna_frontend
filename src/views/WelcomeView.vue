@@ -25,7 +25,6 @@ import { useUriStore } from '@/stores/uri'
 export default {
     data() {
         return {
-            inputed_id: "",
             vh: 0,
         };
     },

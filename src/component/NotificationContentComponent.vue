@@ -14,5 +14,10 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
+    background-color: rgb(255, 255, 255);
+    padding: 8px 16px;
+    border-radius: 10px;
+    width: auto;
+    white-space: nowrap;
 }
 </style>
