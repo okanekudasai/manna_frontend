@@ -1,7 +1,7 @@
 <template lang="">
     <div :class="{ hide: uriStore.uri=='welcomePage' }">
         <div id="nav_bar_space"></div>
-        <div id="nav_bar">
+        <div id="nav_bar" style="z-index: 1000000">
             <div class="flex flex_vertical_center flex_horizontal_center" id="nav_bar_box">
                 <router-link to="/mainPage">
                     <div class="nav_card">
@@ -36,6 +36,7 @@
                 </router-link>
             </div>
         </div>
+        <FriendListContainerComponent />
     </div>
 </template>
 
@@ -46,7 +47,11 @@ const uriStore = useUriStore();
 
 
 <script>
+import FriendListContainerComponent from './FriendListContainerComponent.vue';
 export default {
+    components: {
+        FriendListContainerComponent
+    }
 }
 </script>
 

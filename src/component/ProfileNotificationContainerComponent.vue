@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="hover_pointer flex flex_vertical_center flex_horizontal_center" id="profile_container" style="overflow: hidden" @click="toggle_profile_menu()">
-                    <div v-if="!myInfoStore.pending" style="height: 100%;">
+                    <div v-if="!myInfoStore.pending && myInfoStore.myInfo.profile_url != undefined" style="height: 100%;">
                         <img :src="myInfoStore.myInfo.profile_url" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
