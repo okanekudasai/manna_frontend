@@ -1,6 +1,7 @@
 <template>
     <div :class="{ hide: uriStore.uri=='welcomePage' }">
         <div id="profile_notification_container" style="z-index: 1000;">
+            <span @click="mobile()">sss</span>
             <div class="flex flex_vertical_center">
                 <div class="hover_pointer" style="position:relative; margin-right: 20px;" @click="toggle_notification_content()">
                     <img src="@/img/bell.svg" alt="" style="width: 32px;">
@@ -64,6 +65,9 @@ export default {
         close_menu() {
             this.profile_menu_hidden = true;
             this.notification_content_hidden = true;
+        },
+        mobile() {
+            alert(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
         }
     },  
 }

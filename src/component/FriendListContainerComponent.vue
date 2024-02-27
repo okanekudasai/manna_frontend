@@ -81,6 +81,7 @@ export default {
 #friend_list_container {
     padding: 24px;
     padding-right: 12px;
+    padding-bottom: 0;
     position: fixed;
     bottom: var(--nav-bar-height);
     left: 50%;
@@ -94,6 +95,7 @@ export default {
 #friend_list_box {
     margin-top: 10px;
     padding-right: 12px;
+    padding-bottom: 24px;
     max-height: 200px;
     overflow-y: auto;
 }
