@@ -21,6 +21,11 @@ export default {
         this.myInfoStore.pending = true;
         let user_info = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/token/getUserInfo`).then(res => res.data);
         let keep_login = httpUtil.getCookie("keep_login");
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && keep_login == 'false') {
+            this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`)
+            this.hide = true;
+            return;
+        }
         if (user_info != "" || keep_login == "true") {
             if (keep_login == "true") {
                 this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/token/changeTokenAge`, {keep: true}, this.$header);
