@@ -1,6 +1,6 @@
 <template>
     <div :class="{ hide: uriStore.uri=='welcomePage' }">
-        <div id="profile_notification_container" style="z-index: 1000;">
+        <div id="profile_notification_container">
             <div class="flex flex_vertical_center">
                 <div class="hover_pointer" style="position:relative; margin-right: 20px;" @click="toggle_notification_content()">
                     <img src="@/img/bell.svg" alt="" style="width: 32px;">
@@ -9,8 +9,8 @@
                     </div>
                 </div>
                 <div class="hover_pointer flex flex_vertical_center flex_horizontal_center" id="profile_container" style="overflow: hidden" @click="toggle_profile_menu()">
-                    <div v-if="!myInfoStore.pending && myInfoStore.myInfo.profile_url != undefined" style="height: 100%;">
-                        <img :src="myInfoStore.myInfo.profile_url" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div v-if="!myInfoStore.pending && myInfoStore.myInfo.profile_url != undefined" style="height: 100%; padding: 0px;">
+                        <img :src="myInfoStore.myInfo.profile_url" alt="" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px;">
                     </div>
                 </div>
             </div>

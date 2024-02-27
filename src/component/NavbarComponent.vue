@@ -4,31 +4,31 @@
         <div id="nav_bar" style="z-index: 1000000">
             <div class="flex flex_vertical_center flex_horizontal_center" id="nav_bar_box">
                 <router-link to="/mainPage">
-                    <div class="nav_card">
+                    <div class="nav_card" @click="close_modal">
                         <div v-if="uriStore.uri == 'mainPage'"><img src="@/img/home_selected.svg" alt="" class="selected_icon"></div>
                         <div v-else><img src="@/img/home_not_selected.svg" alt="" class="not_selected_icon"></div>
                         <div>홈</div>
                     </div>
                 </router-link>    
-                <div class="nav_card">
-                    <div v-if="uriStore.uri == 'friendPage'"><img src="@/img/friend_selected.svg" alt="" class="selected_icon"></div>
+                <div class="nav_card" @click="toggle_show_friend_list()">
+                    <div v-if="show_friend_list"><img src="@/img/friend_selected.svg" alt="" class="selected_icon"></div>
                     <div v-else><img src="@/img/friend_not_selected.svg" alt="" class="not_selected_icon"></div>
                     <div>친구</div>
                 </div>
-                <div class="nav_card">
-                    <div v-if="uriStore.uri == 'chatPage'"><img src="@/img/chat_selected.svg" alt="" class="selected_icon"></div>
+                <div class="nav_card" @click="toggle_show_chat_list()">
+                    <div v-if="show_chat_list"><img src="@/img/chat_selected.svg" alt="" class="selected_icon"></div>
                     <div v-else><img src="@/img/chat_not_selected.svg" alt="" class="not_selected_icon"></div>
                     <div>지난대화</div>
                 </div>
                 <router-link to="/bulletinBoard">
-                    <div class="nav_card">
+                    <div class="nav_card" @click="close_modal">
                         <div v-if="uriStore.uri == 'bulletinBoardPage'"><img src="@/img/bullet_selected.svg" alt="" class="selected_icon"></div>
                         <div v-else><img src="@/img/bullet_not_selected.svg" alt="" class="not_selected_icon"></div>
                         <div>게시판</div>
                     </div>
                 </router-link>
                 <router-link to="/noticePage">
-                    <div class="nav_card">
+                    <div class="nav_card" @click="close_modal">
                         <div v-if="uriStore.uri == 'noticePage'"><img src="@/img/notice_selected.svg" alt="" class="selected_icon"></div>
                         <div v-else><img src="@/img/notice_not_selected.svg" alt="" class="not_selected_icon"></div>
                         <div>공지</div>
@@ -36,7 +36,11 @@
                 </router-link>
             </div>
         </div>
-        <FriendListContainerComponent />
+        <div v-if="show_friend_list||show_chat_list">
+            <div id="modal_close_area" @click="close_modal()"></div>
+            <FriendListContainerComponent v-if="show_friend_list" />
+            <ChatListComponent v-if="show_chat_list"/>
+        </div>
     </div>
 </template>
 
@@ -48,9 +52,41 @@ const uriStore = useUriStore();
 
 <script>
 import FriendListContainerComponent from './FriendListContainerComponent.vue';
+import ChatListComponent from './ChatListComponent.vue';
+
 export default {
     components: {
-        FriendListContainerComponent
+        FriendListContainerComponent,
+        ChatListComponent
+    },
+    data() {
+        return {
+            show_friend_list: false,
+            show_chat_list: true,
+            vh: 0,
+        }
+    },
+    created() {
+        if(this.show_friend_list || this.show_chat_list) window.addEventListener('resize', this.setScreenSize);
+    },
+    methods: {
+        toggle_show_friend_list() {
+            this.setScreenSize();
+            this.show_friend_list = !this.show_friend_list;
+            if (this.show_friend_list) this.show_chat_list = false;
+        },
+        toggle_show_chat_list() {
+            this.setScreenSize();
+            this.show_chat_list = !this.show_chat_list;
+            if (this.show_chat_list) this.show_friend_list = false;
+        },
+        setScreenSize() {
+            this.vh = window.innerHeight * 0.01 + 'px';
+        },
+        close_modal() {
+            this.show_friend_list = false;
+            this.show_chat_list = false;
+        }
     }
 }
 </script>
@@ -107,5 +143,10 @@ export default {
 .not_selected_icon {
     width: 30px;
 }
-
+#modal_close_area {
+    width: 100vw;
+    height: calc(v-bind(vh) * 100 - var(--nav-bar-height));
+    position: fixed;
+    top:0; left: 0;
+}
 </style>

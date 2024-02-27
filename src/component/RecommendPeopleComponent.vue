@@ -144,14 +144,10 @@ export default {
         this.$refs.person_card_box.addEventListener("wheel", this.handle_x_scroll);
         const personCardBox = this.$refs.person_card_box;
 
-        console.log(personCardBox.scrollWidth, personCardBox.clientWidth)
-
         personCardBox.addEventListener('scroll', () => {
             
             const currentScrollLeft = personCardBox.scrollLeft;
             const maxScrollLeft = personCardBox.scrollWidth - personCardBox.clientWidth;
-
-            console.log(currentScrollLeft, maxScrollLeft);
 
             if (currentScrollLeft + 1>= maxScrollLeft) {
                 this.onScrollEnd();
