@@ -20,8 +20,6 @@
     </div>
 </template>
 <script>
-import { useUriStore } from '@/stores/uri'
-
 export default {
     data() {
         return {
@@ -41,10 +39,6 @@ export default {
         setScreenSize() {
             this.vh = window.innerHeight * 0.01 + 'px';
         }
-    },
-    setup() {
-        const store = useUriStore();
-        store.uri = "welcomePage";
     }
 }
 </script>

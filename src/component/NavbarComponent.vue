@@ -1,11 +1,12 @@
 <template lang="">
-    <div :class="{ hide: uriStore.uri=='welcomePage' }">
+    <div :class="{ hide: $route.name=='welcome' }">
         <div id="nav_bar_space"></div>
         <div id="nav_bar" style="z-index: 1000000">
             <div class="flex flex_vertical_center flex_horizontal_center" id="nav_bar_box">
+                {{ $route.name  }}
                 <router-link to="/mainPage">
                     <div class="nav_card" @click="close_modal">
-                        <div v-if="uriStore.uri == 'mainPage'"><img src="@/img/home_selected.svg" alt="" class="selected_icon"></div>
+                        <div v-if="$route.name == 'mainPage'"><img src="@/img/home_selected.svg" alt="" class="selected_icon"></div>
                         <div v-else><img src="@/img/home_not_selected.svg" alt="" class="not_selected_icon"></div>
                         <div>홈</div>
                     </div>
@@ -22,14 +23,14 @@
                 </div>
                 <router-link to="/bulletinBoard">
                     <div class="nav_card" @click="close_modal">
-                        <div v-if="uriStore.uri == 'bulletinBoardPage'"><img src="@/img/bullet_selected.svg" alt="" class="selected_icon"></div>
+                        <div v-if="$route.name == 'bulletinBoard'"><img src="@/img/bullet_selected.svg" alt="" class="selected_icon"></div>
                         <div v-else><img src="@/img/bullet_not_selected.svg" alt="" class="not_selected_icon"></div>
                         <div>게시판</div>
                     </div>
                 </router-link>
                 <router-link to="/noticePage">
                     <div class="nav_card" @click="close_modal">
-                        <div v-if="uriStore.uri == 'noticePage'"><img src="@/img/notice_selected.svg" alt="" class="selected_icon"></div>
+                        <div v-if="$route.name == 'noticePage'"><img src="@/img/notice_selected.svg" alt="" class="selected_icon"></div>
                         <div v-else><img src="@/img/notice_not_selected.svg" alt="" class="not_selected_icon"></div>
                         <div>공지</div>
                     </div>
@@ -43,12 +44,6 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { useUriStore } from '@/stores/uri'
-const uriStore = useUriStore();
-</script>
-
 
 <script>
 import FriendListContainerComponent from './FriendListContainerComponent.vue';

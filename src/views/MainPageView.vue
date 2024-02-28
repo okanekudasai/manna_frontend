@@ -13,7 +13,6 @@ import InformationContainerComponent from '@/component/InformationContainerCompo
 import WaitingPeopleIconComponent from '@/component/WaitingPeopleIconComponent.vue';
 
 import { useMyInfoStore } from '@/stores/myInfo'
-import { useUriStore } from '@/stores/uri'
 
 import * as httpUtil from '@/util/httpUtil';
 
@@ -67,10 +66,6 @@ export default {
             }
         },
     },
-    setup() {
-        const store = useUriStore();
-        store.uri = "mainPage";
-    }
 }
 </script>
 <style scoped>

@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="data_loading" style="text-align: center; margin: 30px 0;">
+        <div v-if="!no_data" style="text-align: center; margin: 30px 0;">
             <img src="@/img/pending.svg" alt="" style="width: 30px;">
         </div>
     </div>
@@ -66,6 +66,7 @@ export default {
         return {
             thumbnail_height: '160px',
             data_loading: false,
+            no_data: false,
             feed_q: [
                 {
                     article_id: 777,

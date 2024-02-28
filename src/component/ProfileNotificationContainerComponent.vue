@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ hide: uriStore.uri=='welcomePage' }">
+    <div :class="{ hide: $route.name=='welcome' }">
         <div id="profile_notification_container">
             <div class="flex flex_vertical_center">
                 <div class="hover_pointer" style="position:relative; margin-right: 20px;" @click="toggle_notification_content()">
@@ -29,7 +29,6 @@
 </script>
 
 <script>
-import { useUriStore } from '@/stores/uri'
 import { useMyInfoStore } from '@/stores/myInfo';
 import ProfileMenuComponent from '@/component/ProfileMenuComponent.vue'
 import NotificationContentComponent from './NotificationContentComponent.vue';
@@ -41,7 +40,6 @@ export default {
     },
     data() {
         return {
-            uriStore: useUriStore(),
             myInfoStore: useMyInfoStore(),
             profile_height: "45px",
             profile_menu_hidden: true,
