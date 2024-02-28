@@ -31,6 +31,13 @@ export default {
         const socket = useSocketStore();
         socket.conn = new WebSocket(`${import.meta.env.VITE_API_SOCKET_SERVER}`);
 
+        socket.conn.onopen = () => {
+            console.log("get connected to socket!");
+        }
+        socket.conn.onclose = () => {
+            console.log("lost connection from socket!");
+        }
+
         setInterval(() => {
             socket.conn.send(JSON.stringify({event: "ping", data: {}}));
         }, 3000)
