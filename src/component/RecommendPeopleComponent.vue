@@ -38,10 +38,11 @@
                         쪽지 보내기111
                     </div>
                 </div>
-
-                <div v-if="recommend_people_loading" class="flex flex_vertical_center">
-                    <img src="@/img/pending.svg" alt="" style="width: 30px; margin-right: 20px;">
-                </div>
+                <span ref="end_content" class="flex flex_vertical_center">
+                    <div style="width: 50px;">
+                        <img v-if="recommend_people_loading" src="@/img/pending.svg" alt="" style="width: 30px;">
+                    </div>
+                </span>
             </div>
             <div class="arrow_box left_arrow flex flex_vertical_center flex_horizontal_center">
                 <div class="hover_pointer flex flex_vertical_center flex_horizontal_center arrow_inner_box"
@@ -207,13 +208,20 @@ export default {
         async onScrollEnd() {
             if (this.recommend_people_loading) return;
             this.recommend_people_loading = true;
+            let end_position = this.$refs.end_content.offsetLeft - this.$refs.person_card_box.offsetWidth;
             let res = await new Promise((resolve, reject) => {
                 setTimeout(() => {
                     resolve(1);
                 }, 1000)
             })
-            console.log(res);
-            this.$refs.person_card_box.scrollLeft -= 70;
+            console.log("추천할 사람 받아옴");
+            let current_position = this.$refs.person_card_box.scrollLeft;
+            let final_position = Math.min(current_position, end_position);
+            // this.$refs.person_card_box.scrollLeft = final_position;
+            this.$refs.person_card_box.scrollTo({
+                left: final_position,
+                behavior: 'smooth'
+            });
             this.recommend_people_loading = false;
         },
         go_profile(e) {

@@ -37,33 +37,33 @@ export default {
     },
     methods: {
         async init() {
-            let queryParams = new URLSearchParams(window.location.search);
-            let code = queryParams.get('code');
-            this.myInfoStore.pending = true;
-            if (code != undefined) {
-                console.log("뭔가 있음! 코드를 서버로 보낼게요");
-                let res = await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/google/takeUserInfoWithCode`, {code: code, redirect_url: `${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`}, this.$header).then(res => res.data);
-                if (res == "") {
-                    console.log("잘못된 접근");
-                    this.myInfoStore.pending = false;
-                } else {
-                    console.log(res);
-                    let user_info = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/token/getUserInfo`).then(res => res.data);
-                    console.log(user_info);
+            // let queryParams = new URLSearchParams(window.location.search);
+            // let code = queryParams.get('code');
+            // this.myInfoStore.pending = true;
+            // if (code != undefined) {
+            //     console.log("뭔가 있음! 코드를 서버로 보낼게요");
+            //     let res = await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/google/takeUserInfoWithCode`, {code: code, redirect_url: `${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`}, this.$header).then(res => res.data);
+            //     if (res == "") {
+            //         console.log("잘못된 접근");
+            //         this.myInfoStore.pending = false;
+            //     } else {
+            //         console.log(res);
+            //         let user_info = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/token/getUserInfo`).then(res => res.data);
+            //         console.log(user_info);
                 
-                    this.myInfoStore.myInfo = user_info;
-                    this.myInfoStore.pending = false;
-                    // if (res == 'noobie') this.myInfoStore.keepLogin = true;
-                    setTimeout(() => {
-                        console.log("!!!!@@@", httpUtil.getCookie("keep_login"));
-                        this.myInfoStore.keepLogin = httpUtil.getCookie("keep_login");
-                    }, 1000)
-                    // myInfoStore.setMyInfo(this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/getUserInfo`, {header: {Authorization: ""}}));
-                }
-            } else {
-                console.log("암것도 없음");
-                this.myInfoStore.pending = false;
-            }
+            //         this.myInfoStore.myInfo = user_info;
+            //         this.myInfoStore.pending = false;
+            //         // if (res == 'noobie') this.myInfoStore.keepLogin = true;
+            //         setTimeout(() => {
+            //             console.log("!!!!@@@", httpUtil.getCookie("keep_login"));
+            //             this.myInfoStore.keepLogin = httpUtil.getCookie("keep_login");
+            //         }, 1000)
+            //         // myInfoStore.setMyInfo(this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/getUserInfo`, {header: {Authorization: ""}}));
+            //     }
+            // } else {
+            //     console.log("암것도 없음");
+            //     this.myInfoStore.pending = false;
+            // }
         },
     },
 }

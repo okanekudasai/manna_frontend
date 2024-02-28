@@ -54,8 +54,10 @@
                 </div>
             </div>
         </div>
-        <div v-if="!no_data" style="text-align: center; margin: 30px 0;">
-            <img src="@/img/pending.svg" alt="" style="width: 30px;">
+        <div ref="last_element">
+            <div v-if="!no_data" style="text-align: center; margin: 30px 0; height: 32px;">
+                <img v-if="data_loading" src="@/img/pending.svg" alt="" style="width: 30px;">
+            </div>
         </div>
     </div>
 </template>
@@ -142,25 +144,18 @@ export default {
         },
         async scrollToBottom() {
             this.data_loading = true;
+            const last_element_y = this.$refs.last_element.offsetTop - window.innerHeight + 70;
             let res = await new Promise((resolve, reject) => {setTimeout(() => {
                 resolve(1);
             },2000)})
             console.log(res);
-            // window.scrollBy(0, -60);
 
-            // 현재 스크롤 위치 가져오기
-            const currentScrollPosition = window.scrollY || window.pageYOffset;
+            const currentScrollPosition = window.scrollY;
+            const smallerPosition = Math.min(currentScrollPosition, last_element_y);
 
-            // -60px 스크롤 올린 지점 계산
-            const scrollUpPosition = document.body.offsetHeight - window.scrollY - 130;
-
-            // 더 작은 값을 선택
-            const smallerPosition = Math.min(currentScrollPosition, scrollUpPosition);
-
-            // 해당 위치로 스크롤 이동
             window.scrollTo({
-            top: smallerPosition,
-            behavior: 'smooth' // 부드러운 스크롤 효과를 위해 추가 (optional)
+                top: smallerPosition,
+                behavior: 'smooth'
             });
 
             setTimeout(() => {

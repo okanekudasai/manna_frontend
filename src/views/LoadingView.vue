@@ -1,5 +1,5 @@
 <template>
-    <div id="loading_view_container" :class="{hide: hide}">
+    <div id="loading_view_container" :class="{hide: hide || $route.name != 'welcome'}">
         로딩화면
     </div>
 </template>
@@ -19,7 +19,13 @@ export default {
     async created() {
         window.addEventListener('resize', this.setScreenSize);
 
-        // this.myInfoStore.pending = true;
+        this.myInfoStore.pending = true;
+
+        // mainPage 인가? mainPage면 code 검사
+
+
+
+
         let user_info = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/token/getUserInfo`).then(res => res.data);
         let keep_login = httpUtil.getCookie("keep_login");
         if (user_info == "") {
@@ -27,17 +33,21 @@ export default {
             this.hide = true;
             return;
         }
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && keep_login == 'false') {
-            this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`)
-            this.hide = true;
-            return;
-        }
+        // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && keep_login == 'false') {
+        //     this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`)
+        //     this.hide = true;
+        //     return;
+        // }
 
         if (user_info != "" || keep_login == "true") {
             this.myInfoStore.myInfo = user_info;
-            this.myInfoStore.pending = false;
             this.$router.push("/mainPage");
         }
+
+
+
+
+        this.myInfoStore.pending = false;
         this.hide = true;
     },
     mounted() {
