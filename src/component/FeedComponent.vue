@@ -133,9 +133,9 @@ export default {
     },
     methods: {
         handleScroll() {
-            const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
+            const isAtBottom = window.innerHeight + window.scrollY + 1 > document.body.offsetHeight;
 
-            // console.log(window.innerHeight + window.scrollY, document.body.offsetHeight )
+            console.log(window.innerHeight + window.scrollY, document.body.offsetHeight )
             if (isAtBottom && !this.data_loading) {
                 this.scrollToBottom();
             }
@@ -146,7 +146,7 @@ export default {
                 resolve(1);
             },2000)})
             console.log(res);
-            window.scrollBy(0, -80);
+            window.scrollBy(0, -60);
             this.data_loading = false;
         },
     }
