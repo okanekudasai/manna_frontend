@@ -6,6 +6,9 @@
     .hover_pointer:hover {
         cursor: pointer
     }
+    .hover_scale_1:hover {
+        transform: scale(1.05);
+    }
 }
 
 .flex {

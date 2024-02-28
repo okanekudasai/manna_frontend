@@ -62,7 +62,7 @@ export default {
     data() {
         return {
             show_friend_list: false,
-            show_chat_list: true,
+            show_chat_list: false,
             vh: 0,
         }
     },

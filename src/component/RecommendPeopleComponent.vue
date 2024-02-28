@@ -5,7 +5,8 @@
         </div>
         <div style="position:relative;">
             <div id="person_card_box" ref="person_card_box" class="flex">
-                <div v-for="(person, index) in recommend_people" class="person_card" :key="index">
+
+                <div v-for="(person, index) in recommend_people" class="person_card hover_scale_1 hover_pointer" :key="index" @click="go_profile(person.person_id)">
                     <div style="position: relative;">
                         <img :src="person.profile_url" alt="" class="person_card_profile">
                         <div
@@ -14,9 +15,6 @@
                     </div>
                     <div class="flex flex_vertical_center">
                         <div style="font-weight: 900;">{{ person.nickname }}</div>
-                        <router-link :to="`/profile/${person.person_id}`">
-                            <div class="visit_profile_box">프로필 방문 &gt;</div>
-                        </router-link>
                     </div>
                     <div class="flex">
                         <div>
@@ -40,17 +38,20 @@
                         쪽지 보내기111
                     </div>
                 </div>
+
                 <div v-if="recommend_people_loading" class="flex flex_vertical_center">
                     <img src="@/img/pending.svg" alt="" style="width: 30px; margin-right: 20px;">
                 </div>
             </div>
             <div class="arrow_box left_arrow flex flex_vertical_center flex_horizontal_center">
-                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center arrow_inner_box" @click="smoothScroll(-1)">
+                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center arrow_inner_box"
+                    @click="smoothScroll(-1)">
                     <span>&lt;</span>
                 </div>
             </div>
             <div class="arrow_box right_arrow flex flex_vertical_center flex_horizontal_center">
-                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center arrow_inner_box" @click="smoothScroll(1)">
+                <div class="hover_pointer flex flex_vertical_center flex_horizontal_center arrow_inner_box"
+                    @click="smoothScroll(1)">
                     <span>&gt;</span>
                 </div>
             </div>
@@ -105,7 +106,7 @@ export default {
                         "운동",
                         "그림"
                     ]
-                }, 
+                },
                 {
                     person_id: 123,
                     nickname: "닉네임",
@@ -156,12 +157,12 @@ export default {
         const personCardBox = this.$refs.person_card_box;
 
         personCardBox.addEventListener('scroll', () => {
-            
+
             const currentScrollLeft = personCardBox.scrollLeft;
             const maxScrollLeft = personCardBox.scrollWidth - personCardBox.clientWidth;
 
             // console.log(currentScrollLeft);
-            if (currentScrollLeft + 1>= maxScrollLeft) {
+            if (currentScrollLeft + 1 >= maxScrollLeft) {
                 this.onScrollEnd();
             }
         });
@@ -206,25 +207,30 @@ export default {
         async onScrollEnd() {
             if (this.recommend_people_loading) return;
             this.recommend_people_loading = true;
-            let res = await new Promise((resolve, reject) => {setTimeout(() => {
-                resolve(1);
-            },1000)})
+            let res = await new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(1);
+                }, 1000)
+            })
             console.log(res);
             this.$refs.person_card_box.scrollLeft -= 70;
             this.recommend_people_loading = false;
+        },
+        go_profile(e) {
+            this.$router.push("/profile/" + e);
         }
     }
 }
 </script>
 
 <style scoped>
-
 /* 모바일 */
 @media (max-width: 576px) {
     .person_card {
         width: 160px;
         height: 240px;
     }
+
     .arrow_box {
         display: none;
     }
@@ -240,6 +246,7 @@ export default {
 #person_card_box {
     padding: 14px;
     padding-right: 0;
+    padding-bottom: 30px;
     width: 100%;
     overflow-x: auto;
     -ms-overflow-style: none;
@@ -253,7 +260,8 @@ export default {
     margin-right: 30px;
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.228)
+    box-shadow: 0 4px 10px 2px rgba(0, 0, 0, 0.228);
+    transition: all 0.3s;
 }
 
 .person_card_profile {
@@ -279,9 +287,11 @@ export default {
     top: 0;
     height: 100%;
 }
+
 .left_arrow {
     left: -20px;
 }
+
 .right_arrow {
     right: -20px;
 }
@@ -292,5 +302,4 @@ export default {
     border-radius: 50px;
     background-color: rgba(244, 244, 244, 0.518);
     box-shadow: 0 4px 4px 2px rgba(0, 0, 0, 0.194);
-}
-</style>
+}</style>

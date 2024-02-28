@@ -14,6 +14,7 @@
 import LoadingView from './views/LoadingView.vue';
 import NavbarComponent from '@/component/NavbarComponent.vue'
 import ProfileNotificationContainerComponent from '@/component/ProfileNotificationContainerComponent.vue';
+import { useSocketStore } from '@/stores/socket'
 
 export default {
     components: {
@@ -26,5 +27,13 @@ export default {
         let test = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/test/hello`).then(res => res.data);
         console.log(test);
     },
+    setup() {
+        const socket = useSocketStore();
+        socket.conn = new WebSocket(`${import.meta.env.VITE_API_SOCKET_SERVER}`);
+
+        setInterval(() => {
+            socket.conn.send(JSON.stringify({event: "ping", data: {}}));
+        }, 3000)
+    }
 }
 </script>
