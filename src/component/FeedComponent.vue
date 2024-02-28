@@ -133,9 +133,9 @@ export default {
     },
     methods: {
         handleScroll() {
-            const isAtBottom = window.innerHeight + window.scrollY + 1 > document.body.offsetHeight;
+            const isAtBottom = window.innerHeight + window.scrollY + 1 > document.body.offsetHeight - 50;
 
-            console.log(window.innerHeight + window.scrollY, document.body.offsetHeight )
+            // console.log(window.innerHeight + window.scrollY, document.body.offsetHeight )
             if (isAtBottom && !this.data_loading) {
                 this.scrollToBottom();
             }
@@ -146,8 +146,26 @@ export default {
                 resolve(1);
             },2000)})
             console.log(res);
-            window.scrollBy(0, -60);
-            this.data_loading = false;
+            // window.scrollBy(0, -60);
+
+            // 현재 스크롤 위치 가져오기
+            const currentScrollPosition = window.scrollY || window.pageYOffset;
+
+            // -60px 스크롤 올린 지점 계산
+            const scrollUpPosition = document.body.offsetHeight - window.scrollY - 130;
+
+            // 더 작은 값을 선택
+            const smallerPosition = Math.min(currentScrollPosition, scrollUpPosition);
+
+            // 해당 위치로 스크롤 이동
+            window.scrollTo({
+            top: smallerPosition,
+            behavior: 'smooth' // 부드러운 스크롤 효과를 위해 추가 (optional)
+            });
+
+            setTimeout(() => {
+                this.data_loading = false;
+            }, 600)
         },
     }
 };

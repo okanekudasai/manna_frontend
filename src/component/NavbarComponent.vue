@@ -3,7 +3,6 @@
         <div id="nav_bar_space"></div>
         <div id="nav_bar" style="z-index: 1000000">
             <div class="flex flex_vertical_center flex_horizontal_center" id="nav_bar_box">
-                {{ $route.name  }}
                 <router-link to="/mainPage">
                     <div class="nav_card" @click="close_modal">
                         <div v-if="$route.name == 'mainPage'"><img src="@/img/home_selected.svg" alt="" class="selected_icon"></div>
