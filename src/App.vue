@@ -40,7 +40,7 @@ export default {
 
         setInterval(() => {
             socket.conn.send(JSON.stringify({event: "ping", data: {}}));
-        }, 3000)
+        }, 30000)
     }
 }
 </script>
