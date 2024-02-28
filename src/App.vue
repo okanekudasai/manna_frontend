@@ -35,7 +35,7 @@ export default {
             console.log("get connected to socket!");
         }
         socket.conn.onclose = () => {
-            console.log("lost connection from socket!");
+            console.log("lost connection from socket!!");
         }
 
         setInterval(() => {
