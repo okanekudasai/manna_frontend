@@ -18,7 +18,8 @@ export default {
     },
     async created() {
         window.addEventListener('resize', this.setScreenSize);
-        this.myInfoStore.pending = true;
+
+        // this.myInfoStore.pending = true;
         let user_info = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/token/getUserInfo`).then(res => res.data);
         let keep_login = httpUtil.getCookie("keep_login");
         if (user_info == "") {
@@ -26,7 +27,6 @@ export default {
             this.hide = true;
             return;
         }
-
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && keep_login == 'false') {
             this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`)
             this.hide = true;

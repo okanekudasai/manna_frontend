@@ -4,5 +4,6 @@ import { defineStore } from 'pinia'
 
 export const useSocketStore = defineStore('socket', () => {
     let conn = ref({});
-    return { conn }
+    let people_list = ref([]);
+    return { conn, people_list }
 });

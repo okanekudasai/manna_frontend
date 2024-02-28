@@ -37,8 +37,26 @@ export default {
         socket.conn.onclose = () => {
             console.log("lost connection from socket!!");
         }
+        socket.conn.onmessage = async (msg) => {
+            let dto = JSON.parse(msg.data);
+            let code = dto.code;
+            let value = dto.value;
+            if (code == "existing_people_list") {
+                socket.people_list = value.people_list;
+            } else if (code == "new_person_come") {
+                socket.people_list.push(value.person);
+            } else if (code == "person_leaved") {
+                for (let i = 0; socket.people_list.length; i++) {
+                    if (socket.people_list[i].session_id == value.person.session_id) {
+                        socket.people_list.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }
 
         setInterval(() => {
+            console.log("ping!");
             socket.conn.send(JSON.stringify({event: "ping", data: {}}));
         }, 30000)
     }

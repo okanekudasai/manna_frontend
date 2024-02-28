@@ -38,8 +38,8 @@ export default {
     },
     methods: {
         async init() {
-            // let header = {headers:{"Content-Type": "application/x-www-form-urlencoded"}};
-            let code = this.checkCode();
+            let queryParams = new URLSearchParams(window.location.search);
+            let code = queryParams.get('code');
             this.myInfoStore.pending = true;
             if (code != undefined) {
                 console.log("뭔가 있음! 코드를 서버로 보낼게요");
@@ -54,7 +54,11 @@ export default {
                 
                     this.myInfoStore.myInfo = user_info;
                     this.myInfoStore.pending = false;
-                    if (res == 'noobie') this.myInfoStore.keepLogin = false;
+                    // if (res == 'noobie') this.myInfoStore.keepLogin = true;
+                    setTimeout(() => {
+                        console.log("!!!!@@@", httpUtil.getCookie("keep_login"));
+                        this.myInfoStore.keepLogin = httpUtil.getCookie("keep_login");
+                    }, 1000)
                     // myInfoStore.setMyInfo(this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/getUserInfo`, {header: {Authorization: ""}}));
                 }
             } else {
@@ -62,11 +66,6 @@ export default {
                 this.myInfoStore.pending = false;
             }
         },
-        checkCode() {
-            let queryString = window.location.search;
-            let queryParams = new URLSearchParams(queryString);
-            return queryParams.get('code');
-        }
     },
     setup() {
         const store = useUriStore();
