@@ -61,7 +61,7 @@ export default {
             this.myInfoStore.myInfo = {
                 anonymous: true,
                 name: "익명유저 " + anonymousNumber,
-                profile_url: "src/img/hat.svg",
+                profile_url: require(`@/img/hat.svg`),
             }
             this.myInfoStore.pending = false;
             this.hide = true;
