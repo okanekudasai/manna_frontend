@@ -1,10 +1,23 @@
 <template>
     <div>
         <span>피드</span>
-        <div v-for="(feed, index) in feed_q" :key="index">
+        <div v-for="(feed, index) in feed_q" :key="index" style="margin: 60px 0;">
 
             <div class="article_content_container">
+                
                 <div class="article_content_box">
+                    
+                <div id="profile_box" class="flex flex_vertical_center">
+                    <div>
+                        <img class="profile_box_img" :src="feed.writer.profile_url" alt="" />
+                    </div>
+                    <div>
+                        <div>{{ feed.writer.name }}</div>
+                        <router-link :to="`/profile/${feed.writer_id}`">
+                            <div class="visit_profile_box">프로필 방문 &gt;</div>
+                        </router-link>
+                    </div>
+                </div>
                     <div>
                         <div class="article_title" v-if="feed.article_title != null">
                             {{ feed.article_title }}
@@ -17,23 +30,8 @@
                 </div>
                 <div v-if="feed.article_thumbnail != null" style="position: relative">
                     <img class="article_thumbnail" :src="feed.article_thumbnail" alt="" />
-                    <div class="article_picture_count_badge">
-                        {{ feed.article_picture_count }}
-                    </div>
                 </div>
             </div>
-            <div class="flex" style="justify-content: space-between;">
-                <div id="profile_box" class="flex flex_vertical_center">
-                    <div>
-                        <img class="profile_box_img" :src="feed.writer_profile_url" alt="" />
-                    </div>
-                    <div>
-                        <div>{{ feed.writer }}</div>
-                        <router-link :to="`/profile/${feed.writer_id}`">
-                            <div class="visit_profile_box">프로필 방문 &gt;</div>
-                        </router-link>
-                    </div>
-                </div>
                 <div class="flex">
                     <div class="flex flex_vertical_center">
                         <div>
@@ -52,11 +50,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <div ref="last_element">
-            <div v-if="!no_data" style="text-align: center; margin: 30px 0; height: 32px;">
+            <div class="last_element_box" v-if="!no_data">
                 <img v-if="data_loading" src="@/img/pending.svg" alt="" style="width: 30px;">
+            </div>
+            <div class="last_element_box" v-else="">
+                더 이상 데이터가 없어요;;
             </div>
         </div>
     </div>
@@ -66,66 +66,20 @@
 export default {
     data() {
         return {
-            thumbnail_height: '160px',
+            feed_page: 0,
+            thumbnail_height: '200px',
             data_loading: false,
             no_data: false,
-            feed_q: [
-                {
-                    article_id: 777,
-                    writer_id: 123,
-                    writer: "ffffff",
-                    writer_profile_url:
-                        "https://img.khan.co.kr/news/2020/10/16/2020101601001687000138341.jpg",
-                    article_title: "안녕하세요",
-                    article_content:
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nulla maiores ipsum accusantium corrupti repudiandae distinctio facere eligendi, reiciendis eaque quae rerum debitis molestias blanditiis voluptatem odit itaque sed consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nulla maiores ipsum accusantium corrupti repudiandae distinctio facere eligendi, reiciendis eaque quae rerum debitis molestias blanditiis voluptatem odit itaque sed consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nulla maiores ipsum accusantium corrupti repudiandae distinctio facere eligendi, reiciendis eaque quae rerum debitis molestias blanditiis voluptatem odit itaque sed consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nulla maiores ipsum accusantium corrupti repudiandae distinctio facere eligendi, reiciendis eaque quae rerum debitis molestias blanditiis voluptatem odit itaque sed consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem nulla maiores ipsum accusantium corrupti repudiandae distinctio facere eligendi, reiciendis eaque quae rerum debitis molestias blanditiis voluptatem odit itaque sed consequatur.",
-                    article_thumbnail:
-                        "https://i.ytimg.com/vi/HHCGkGA-Sis/maxresdefault.jpg",
-                    article_picture_count: 7,
-                    heart_count: 5,
-                    reply_count: 6,
-                },
-                {
-                    article_id: 777,
-                    writer_id: 123,
-                    writer: "ffffff",
-                    writer_profile_url:
-                        "https://img.khan.co.kr/news/2020/10/16/2020101601001687000138341.jpg",
-                    article_title: "안녕하세요",
-                    article_content: "s voluptatem odit itaque sed consequatur.",
-                    article_thumbnail:
-                        "https://i.ytimg.com/vi/HHCGkGA-Sis/maxresdefault.jpg",
-                    article_picture_count: 7,
-                    heart_count: 5,
-                    reply_count: 6,
-                },
-                {
-                    article_id: 777,
-                    writer_id: 123,
-                    writer: "ffffff",
-                    writer_profile_url:
-                        "https://img.khan.co.kr/news/2020/10/16/2020101601001687000138341.jpg",
-                    article_title: "안녕하세요",
-                    article_content: "luptatem odit itaque sed consequatur.\n",
-                    heart_count: 5,
-                    reply_count: 6,
-                },
-                {
-                    article_id: 777,
-                    writer_id: 123,
-                    writer: "ffffff",
-                    writer_profile_url:
-                        "https://img.khan.co.kr/news/2020/10/16/2020101601001687000138341.jpg",
-                    article_title: "안녕하세요",
-                    article_content: "s voluptatem odit itaque sed consequatur.",
-                    article_thumbnail:
-                        "https://i.ytimg.com/vi/HHCGkGA-Sis/maxresdefault.jpg",
-                    article_picture_count: 7,
-                    heart_count: 5,
-                    reply_count: 6,
-                },
-            ],
+            feed_q: undefined,
         };
+    },
+    async created() {
+        // await new Promise((resolve, reject) => {setTimeout(() => {
+        //     console.log("기다림 끝");
+        //     resolve(1);
+        // }, 10000)})
+        this.feed_q = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/feed/getFeedPage/${this.feed_page++}`).then(res => res.data.content)
+        console.log(this.feed_q);
     },
     mounted() {
         window.addEventListener("scroll", this.handleScroll);
@@ -138,16 +92,23 @@ export default {
             const isAtBottom = window.innerHeight + window.scrollY + 1 > document.body.offsetHeight - 50;
 
             // console.log(window.innerHeight + window.scrollY, document.body.offsetHeight )
-            if (isAtBottom && !this.data_loading) {
+            if (isAtBottom && !this.data_loading && !this.no_data) {
+                if (document.body.offsetHeight <= this.$refs.last_element.offsetTop - window.innerHeight + 70) return;
                 this.scrollToBottom();
             }
         },
         async scrollToBottom() {
             this.data_loading = true;
             const last_element_y = this.$refs.last_element.offsetTop - window.innerHeight + 70;
+            let new_data = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/feed/getFeedPage/${this.feed_page++}`).then(res => res.data.content)
             let res = await new Promise((resolve, reject) => {setTimeout(() => {
                 resolve(1);
-            },2000)})
+            }, 1800)})
+            if (new_data.length == 0) {
+                this.no_data = true;
+                return;
+            }
+            this.feed_q.push(...new_data);
             console.log("피드 데이터 받아옴");
 
             const currentScrollPosition = window.scrollY;
@@ -245,4 +206,7 @@ export default {
     border-radius: 50px;
 }
 
+.last_element_box {
+    text-align: center; margin: 30px 0; height: 32px;
+}
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div id="loading_view_container" :class="{hide: hide || $route.name != 'welcome'}">
-    <!-- <div id="loading_view_container"> -->
-        로딩화면 {{ $route.name }}
+    <!-- <div id="loading_view_container" @click="ggg()" class="hover_pointer"> -->
+        로딩화면
     </div>
 </template>
 
@@ -76,7 +76,7 @@ export default {
     methods: {
         setScreenSize() {
             this.vh = window.innerHeight * 0.01 + 'px';
-        }
+        },
     },
 }
 </script>
