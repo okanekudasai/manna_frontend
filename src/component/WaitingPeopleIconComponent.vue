@@ -3,18 +3,47 @@
         <div id="waiting_people_icon" class="hover_pointer flex flex_vertical_center flex_horizontal_center" @click="get_waiting_people_button_click">
             <img class="" src="@/img/group.svg" alt="" style="width: 30px;">
             
-            <div id="waiting_people_badge" class="flex flex_vertical_center flex_horizontal_center">
-                2
+            <div class="waiting_people_badge flex flex_vertical_center flex_horizontal_center" :class="{'small_font': new_message_count >= 100}">
+                {{ (new_message_count >= 100) ? '+99' : new_message_count }}
             </div>
         </div>
-        <div id="waiting_people_message">
-            <div>1022명의 사람이 대화를</div>
+        <!-- <div id="waiting_people_message" v-if="socket.people_list.length > 0"> -->
+        <div id="waiting_people_message" :class="{'size_down_Y': hide_waiting_people_number}">
+            <div>{{ socket.people_list.length }}명의 사람이 대화를</div>
             <div>기다리고 있어요</div>
         </div>
     </div>
 </template>
+
 <script>
+import { useSocketStore } from '@/stores/socket';
+
 export default {
+    data() {
+        return {
+            hide_waiting_people_number: true,
+            new_message_count: 22,
+            socket: useSocketStore()
+        }
+    },
+    watch: {
+        socket(newValue, oldValue) {
+            console.log("변화감지!")
+        }
+    },
+    created() {
+        this.hide_waiting_people_number = false;
+        setTimeout(() => {
+            this.hide_waiting_people_number = true;
+        }, 500000)
+        
+    },
+    mounted() {
+        this.socket.$subscribe((mutation, state) => {
+            console.log(mutation);
+            console.log(state);
+        })
+    },
     methods: {
         get_waiting_people_button_click: () => {
             alert("눌렸음");
@@ -48,7 +77,7 @@ export default {
     /* box-shadow: 0 2px 8px 2px rgba(0,0,0,0.2); */
 }
 
-#waiting_people_badge {
+.waiting_people_badge {
     position:absolute;
     font-size: 12px;
     width: 20px;
@@ -60,4 +89,15 @@ export default {
     right: -5px;
 }
     
+.small_font {
+    font-size: 9px;
+}
+
+#waiting_people_message {
+    transition: all 0.1s;
+}
+
+.size_down_Y {
+    transform: scaleY(0);
+}
 </style>

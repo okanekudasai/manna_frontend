@@ -22,7 +22,7 @@
                     <router-link to="/editProfilePage">
                         <div class="menu_card hover_pointer flex flex_vertical_center" @click="edit_profile()">
                             <img src="@/img/edit_profile.svg" alt="" style="margin-right: 6px; width: 18px;">
-                            <span>프로필 수정</span>
+                            <span>내 정보 수정</span>
                         </div>
                     </router-link>
                     <hr>

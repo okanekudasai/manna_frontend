@@ -56,7 +56,6 @@ export default {
         }
 
         setInterval(() => {
-            console.log("ping!");
             socket.conn.send(JSON.stringify({event: "ping", data: {}}));
         }, 30000)
     }

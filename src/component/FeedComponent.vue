@@ -148,7 +148,7 @@ export default {
             let res = await new Promise((resolve, reject) => {setTimeout(() => {
                 resolve(1);
             },2000)})
-            console.log(res);
+            console.log("피드 데이터 받아옴");
 
             const currentScrollPosition = window.scrollY;
             const smallerPosition = Math.min(currentScrollPosition, last_element_y);
