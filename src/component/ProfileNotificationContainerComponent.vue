@@ -17,8 +17,8 @@
             <div :class="{hide: profile_menu_hidden && notification_content_hidden}">
                 <div style="position: fixed; top:0; left:0; width: 100vw; height: 100vh; z-index: -1;" @click="close_menu()"></div>
                 <div style="position: relative; top: 10px;">
-                    <NotificationContentComponent class="profile_notification_context" :class="{hide: notification_content_hidden}" />
-                    <ProfileMenuComponent class="profile_notification_context" :class="{hide: profile_menu_hidden}"/>
+                    <NotificationContentComponent class="profile_notification_context" :class="{hide: notification_content_hidden}" @close_this_modal="close_menu"/>
+                    <ProfileMenuComponent class="profile_notification_context" :class="{hide: profile_menu_hidden}" @close_this_modal="close_menu"/>
                 </div>
             </div>
         </div>
