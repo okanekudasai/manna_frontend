@@ -8,6 +8,7 @@
 <script>
 import * as httpUtil from '@/util/httpUtil';
 import { useMyInfoStore } from '@/stores/myInfo';
+import hat_image from '@/img/hat.svg';
 
 export default {
     data() {
@@ -61,7 +62,7 @@ export default {
             this.myInfoStore.myInfo = {
                 anonymous: true,
                 name: "익명유저 " + anonymousNumber,
-                profile_url: require(`@/img/hat.svg`),
+                profile_url: hat_image,
             }
             this.myInfoStore.pending = false;
             this.hide = true;
