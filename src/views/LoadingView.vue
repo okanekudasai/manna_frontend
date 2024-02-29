@@ -19,6 +19,8 @@ export default {
         };
     },
     async created() {
+        // 혹시 이과정에 오류가 있어서 로딩화면을 벗어나지 못한다면 5초이후 무조건 열리게 셋타임아웃을 달아줘요 나중에
+
         window.addEventListener('resize', this.setScreenSize);
 
         this.myInfoStore.pending = true;

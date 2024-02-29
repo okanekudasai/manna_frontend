@@ -11,6 +11,10 @@
     }
 }
 
+.scale_0 {
+    transform: scale(0);
+}
+
 .flex {
     display: flex;
 }

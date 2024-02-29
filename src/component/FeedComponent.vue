@@ -68,7 +68,7 @@ export default {
         return {
             feed_page: 0,
             thumbnail_height: '200px',
-            data_loading: false,
+            data_loading: true,
             no_data: false,
             feed_q: undefined,
         };
@@ -79,7 +79,7 @@ export default {
         //     resolve(1);
         // }, 10000)})
         this.feed_q = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/feed/getFeedPage/${this.feed_page++}`).then(res => res.data.content)
-        console.log(this.feed_q);
+        this.data_loading = false;
     },
     mounted() {
         window.addEventListener("scroll", this.handleScroll);
@@ -90,16 +90,12 @@ export default {
     methods: {
         handleScroll() {
             const isAtBottom = window.innerHeight + window.scrollY + 1 > document.body.offsetHeight - 50;
-
-            // console.log(window.innerHeight + window.scrollY, document.body.offsetHeight )
             if (isAtBottom && !this.data_loading && !this.no_data) {
-                if (document.body.offsetHeight <= this.$refs.last_element.offsetTop - window.innerHeight + 70) return;
                 this.scrollToBottom();
             }
         },
         async scrollToBottom() {
             this.data_loading = true;
-            const last_element_y = this.$refs.last_element.offsetTop - window.innerHeight + 70;
             let new_data = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/feed/getFeedPage/${this.feed_page++}`).then(res => res.data.content)
             let res = await new Promise((resolve, reject) => {setTimeout(() => {
                 resolve(1);
@@ -110,15 +106,6 @@ export default {
             }
             this.feed_q.push(...new_data);
             console.log("피드 데이터 받아옴");
-
-            const currentScrollPosition = window.scrollY;
-            const smallerPosition = Math.min(currentScrollPosition, last_element_y);
-
-            window.scrollTo({
-                top: smallerPosition,
-                behavior: 'smooth'
-            });
-
             setTimeout(() => {
                 this.data_loading = false;
             }, 600)
