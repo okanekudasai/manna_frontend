@@ -54,26 +54,26 @@ export default {
         console.log(user_info);
         console.log(keep_login);
 
-        if (user_info != "" || keep_login == "true") {
+        if (user_info == "") {
+            this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`);
+            let anonymousNumber = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/getAnonymousNumber`).then(res => res.data);
+            console.log(anonymousNumber + "번 째의 익명유저")
+            this.myInfoStore.myInfo = {
+                anonymous: true,
+                name: "익명유저 " + anonymousNumber,
+                profile_url: "src/img/hat.svg",
+            }
+            this.myInfoStore.pending = false;
+            this.hide = true;
+        }
+
+        else {
             this.myInfoStore.myInfo = user_info;
             this.myInfoStore.pending = false;
             this.hide = true;
             this.$router.push("/mainPage");
-            return;
-        }
-
-        this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`);
-        
-        let anonymousNumber = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/getAnonymousNumber`).then(res => res.data);
-        console.log(anonymousNumber + "번 째의 익명유저")
-        this.myInfoStore.myInfo = {
-            anonymous: true,
-            name: "익명유저 " + anonymousNumber,
-            profile_url: "src/img/hat.svg",
         }
         
-        this.myInfoStore.pending = false;
-        this.hide = true;
     },
     mounted() {
         this.setScreenSize();
