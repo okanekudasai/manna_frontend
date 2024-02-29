@@ -23,21 +23,15 @@ export default {
 
         this.myInfoStore.pending = true;
 
-        // mainPage 이면서 code가 있으면서 성공하는 경우는 로그인
-        // 이 과정에서 로그인이 안되면 keep_login 쿠키 검사
-        // keep_login이 true면서 access_token으로 로그인 성공시 로그인
-        // 이 외에는 손님정보 추가
         let queryParams = new URLSearchParams(window.location.search);
         let code = queryParams.get('code');
         if (code != null) {
             console.log("뭔가 있음! 코드를 서버로 보낼게요");
-            let res = await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/google/takeUserInfoWithCode`, {code: code, redirect_url: `${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`}, this.$header).then(res => res.data);
-            if (res == "") {
+            let user_info = await this.$axios.post(`${import.meta.env.VITE_API_SERVER}/auth/google/takeUserInfoWithCode`, {code: code, redirect_url: `${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`}, this.$header).then(res => res.data);
+            if (user_info == "") {
                 console.log("유효하지 않은 코드를 통한 접근");
             } else {
-                console.log(res);
-                let user_info = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/token/getUserInfo`).then(res => res.data);
-                console.log(user_info);
+                console.log("!!!!", user_info);
                 this.myInfoStore.myInfo = user_info;
                 this.myInfoStore.pending = false;
                 setTimeout(() => {
