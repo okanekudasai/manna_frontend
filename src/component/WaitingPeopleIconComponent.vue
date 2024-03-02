@@ -4,7 +4,7 @@
             <img class="" src="@/img/group.svg" alt="" style="width: 30px;">
             
             <div class="waiting_people_badge flex flex_vertical_center flex_horizontal_center" :class="{'small_font': new_message_count >= 100}">
-                {{ (new_message_count >= 100) ? '+99' : new_message_count }}
+                {{ (socket.people_list.length >= 100) ? '+99' : socket.people_list.length }}
             </div>
         </div>
         <!-- <div id="waiting_people_message" v-if="socket.people_list.length > 0"> -->
@@ -32,10 +32,12 @@ export default {
         }
     },
     created() {
-        this.hide_waiting_people_number = false;
         setTimeout(() => {
-            this.hide_waiting_people_number = true;
-        }, 500000)
+            this.hide_waiting_people_number = false;
+            setTimeout(() => {
+                this.hide_waiting_people_number = true;
+            }, 5000)
+        }, 300)
         
     },
     mounted() {

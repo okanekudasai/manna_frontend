@@ -41,6 +41,6 @@ export default {
     width: 100%;
     height:calc(v-bind(vh) * 100);
     background: rgba(0, 0, 0, 0.671);
-    z-index: 1000;
+    z-index: 1000001;
 }
 </style>
