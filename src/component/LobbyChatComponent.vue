@@ -20,7 +20,7 @@
                             attach_file
                         </span>
                     </div>
-                    <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1></textarea>
+                    <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1 @focusin="setVh()"  @focusout="setVh()"></textarea>
                     <div style="border: dashed; margin-bottom: 10px;" ref="send_button">
                         <span class="material-symbols-outlined">
                             send
@@ -57,16 +57,17 @@ export default {
     },
     watch: {
         input_lobby_chat(newValue, oldValue) {
-            console.log(this.$refs.lobby_chat_textarea.style.height);
-            this.$refs.lobby_chat_textarea.style.height = 'auto'
-            this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
+            this.setTextAreaHeight();
+            
         }
     },
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
-            this.vh = useVhStore().vh;
             console.log(this.vh);
-        })
+            this.vh = useVhStore().vh;
+        });
+
+        console.log(this.vh);
         
         this.$refs.lobby_chat_textarea.style.height = 'auto'
         this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
@@ -88,6 +89,16 @@ export default {
         gg() {
             console.log("gggg");
             event.preventDefault();
+        },
+        setTextAreaHeight() {
+            console.log(this.$refs.lobby_chat_textarea.style.height);
+            this.$refs.lobby_chat_textarea.style.height = 'auto'
+            this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
+        },
+        setVh() {
+            console.log("ggggg");
+            useVhStore().vh = window.innerHeight * 0.01 + 'px';
+            console.log(useVhStore().vh);
         }
     }
 }
@@ -99,7 +110,7 @@ export default {
 @media (max-width: 576px) { 
     #content_container {
         width: 100%;
-        height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin)));
+        height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2));
         z-index: 1000000001;
         padding: 35px 10px 0px;
     }
@@ -109,6 +120,7 @@ export default {
         max-width: 100%;
         width: 600px;
         height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2) - var(--nav-bar-height));
+        padding: 35px 10px;
         z-index: 2;
     }
 }
