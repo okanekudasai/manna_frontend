@@ -1,7 +1,7 @@
 <template>
-    <div @wheel="gg">
+    <div>
         <ModalBackground @close_modal="close_modal()"></ModalBackground>
-        <div id="content_container" class="flex" style="flex-direction: column;">
+        <div id="content_container" class="flex" style="flex-direction: column;" @wheel="gg">
             <div class="flex">
                 <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center" @click="modal_chat()">
                     채팅
@@ -14,8 +14,12 @@
                 <div style="flex-grow: 1; border:dashed;">
                     sefaef
                 </div>
-                <div style="border: dashed; padding: 0 10px;" class="flex">
+                <div style="border: dashed; padding: 0 10px; align-items: end;" class="flex">
+                    <div style="border: dashed; margin-bottom: 10px;" ref="attach_button">첨부</div>
                     <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1></textarea>
+                    <div style="border: dashed; margin-bottom: 10px;" ref="send_button">
+                        보내기
+                    </div>
                 </div>
             </div>
             <div v-if="modal_type_people" class="main_content_box">
@@ -59,6 +63,8 @@ export default {
         
         this.$refs.lobby_chat_textarea.style.height = 'auto'
         this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
+        this.$refs.send_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
+        this.$refs.attach_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
     },
     methods: {
         close_modal() {
@@ -74,7 +80,7 @@ export default {
         },
         gg() {
             console.log("gggg");
-            event.stopPropagation();
+            event.preventDefault();
         }
     }
 }
@@ -127,10 +133,11 @@ export default {
     line-height: 1.2em;
     display: block;
     margin: 10px;
-    min-height: 1.2em;
+    max-height: 100px;
     /* height: 1.2em; */
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
+    -ms-overflow-style: none; /* 인터넷 익스플로러 */
+    scrollbar-width: none; /* 파이어폭스 */
+
 }
 
 
