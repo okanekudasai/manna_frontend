@@ -94,15 +94,13 @@ export default {
         setVhIn() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+                document.querySelector("body").style.setProperty("height", useVhStore().vh + "px");
             }, 1000)
         },
         setVhOut() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
+                document.querySelector("body").style.removeProperty('height');
             }, 1000)
         }
     }
