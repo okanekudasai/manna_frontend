@@ -96,9 +96,8 @@ export default {
         setVhIn() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-                console.log("ggggg");
-                document.querySelector("#main_page_container").style.height = window.visualViewport.height + 'px';
-                document.querySelector("#main_page_container").style.overflow = "hidden"
+                document.querySelector("body").style.height = window.visualViewport.height + 'px';
+                document.querySelector("body").style.overflow = "hidden"
             }, 500)
         },
         setVhOut() {
