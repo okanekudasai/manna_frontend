@@ -9,19 +9,19 @@
 import * as httpUtil from '@/util/httpUtil';
 import { useMyInfoStore } from '@/stores/myInfo';
 import hat_image from '@/img/hat.svg';
+import { useVhStore } from '@/stores/vh';
 
 export default {
     data() {
         return {
             myInfoStore: useMyInfoStore(),
             hide: false,
-            vh: 0,
+            vh: useVhStore().vh,
         };
     },
     async created() {
         // 혹시 이과정에 오류가 있어서 로딩화면을 벗어나지 못한다면 5초이후 무조건 열리게 셋타임아웃을 달아줘요 나중에
 
-        window.addEventListener('resize', this.setScreenSize);
 
         this.myInfoStore.pending = true;
 
@@ -48,8 +48,8 @@ export default {
 
         let keep_login = httpUtil.getCookie("keep_login");
         let user_info = await this.$axios.get(`${import.meta.env.VITE_API_SERVER}/auth/token/getUserInfo`).then(res => res.data);
-        console.log(user_info);
-        console.log(keep_login);
+        // console.log(user_info);
+        // console.log(keep_login);
 
         if (user_info == "") {
             this.$axios.delete(`${import.meta.env.VITE_API_SERVER}/auth/deleteToken`);
@@ -73,13 +73,10 @@ export default {
         
     },
     mounted() {
-        this.setScreenSize();
+        useVhStore().$subscribe((mutation, state) => {
+            this.vh = mutation.events.newValue
+        })
     }, 
-    methods: {
-        setScreenSize() {
-            this.vh = window.innerHeight * 0.01 + 'px';
-        },
-    },
 }
 </script>
 

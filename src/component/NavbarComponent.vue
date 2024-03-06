@@ -47,6 +47,7 @@
 <script>
 import FriendListContainerComponent from './FriendListContainerComponent.vue';
 import ChatListComponent from './ChatListComponent.vue';
+import { useVhStore } from '@/stores/vh';
 
 export default {
     components: {
@@ -57,25 +58,23 @@ export default {
         return {
             show_friend_list: false,
             show_chat_list: false,
-            vh: 0,
+            vh: useVhStore().vh,
         }
     },
-    created() {
-        if(this.show_friend_list || this.show_chat_list) window.addEventListener('resize', this.setScreenSize);
+    mounted() {
+        useVhStore().$subscribe((mutation, state) => {
+            this.vh = mutation.events.newValue
+        })
     },
     methods: {
         toggle_show_friend_list() {
-            this.setScreenSize();
+            console.log("!!!!!");
             this.show_friend_list = !this.show_friend_list;
             if (this.show_friend_list) this.show_chat_list = false;
         },
         toggle_show_chat_list() {
-            this.setScreenSize();
             this.show_chat_list = !this.show_chat_list;
             if (this.show_chat_list) this.show_friend_list = false;
-        },
-        setScreenSize() {
-            this.vh = window.innerHeight * 0.01 + 'px';
         },
         close_modal() {
             this.show_friend_list = false;

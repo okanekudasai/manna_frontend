@@ -5,18 +5,19 @@
 </template>
 
 <script>
+import { useVhStore } from '@/stores/vh';
+
 export default {
     data() {
         return {
-            vh:0,
+            vh: useVhStore().vh,
         }
     },
-    created() {
-        window.addEventListener('resize', this.setScreenSize);
-    },
     mounted() {
-        this.setScreenSize();
-
+        useVhStore().$subscribe((mutation, state) => {
+            console.log("!!!" + this.vh);
+            this.vh = mutation.events.newValue
+        })
     },
     methods: {
         exit_modal() {
@@ -25,9 +26,6 @@ export default {
         stop_propagation() {
             event.stopPropagation();
         },
-        setScreenSize() {
-            this.vh = window.innerHeight * 0.01 + 'px';
-        }
     }
 }
 </script>

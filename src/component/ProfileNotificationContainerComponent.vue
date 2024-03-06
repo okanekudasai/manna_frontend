@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div :class="{hide: profile_menu_hidden && notification_content_hidden}">
-                <div style="position: fixed; top:0; left:0; width: 100vw; height: 100vh; z-index: -1;" @click="close_menu()"></div>
+                <div id="close_background" @click="close_menu()"></div>
                 <div style="position: relative; top: 10px;">
                     <NotificationContentComponent class="profile_notification_context" :class="{hide: notification_content_hidden}" @close_this_modal="close_menu"/>
                     <ProfileMenuComponent class="profile_notification_context" :class="{hide: profile_menu_hidden}" @close_this_modal="close_menu"/>
@@ -32,6 +32,7 @@
 import { useMyInfoStore } from '@/stores/myInfo';
 import ProfileMenuComponent from '@/component/ProfileMenuComponent.vue'
 import NotificationContentComponent from './NotificationContentComponent.vue';
+import { useVhStore } from '@/stores/vh';
 
 export default {
     components: {
@@ -44,7 +45,13 @@ export default {
             profile_height: "45px",
             profile_menu_hidden: true,
             notification_content_hidden: true,
+            vh: useVhStore().vh,
         }
+    },
+    mounted() {
+        useVhStore().$subscribe((mutation, state) => {
+            this.vh = mutation.events.newValue
+        })
     },
     methods: {
         toggle_profile_menu() {
@@ -97,6 +104,13 @@ export default {
 
 .profile_notification_context {
     box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.18);
+}
+#close_background {
+    position: fixed;
+    top:0; left:0;
+    width: 100vw;
+    height: calc(v-bind(vh) * 100);
+    z-index: -1;
 }
 </style>
 
