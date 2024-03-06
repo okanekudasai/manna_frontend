@@ -20,7 +20,7 @@
                             attach_file
                         </span>
                     </div>
-                    <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1 @focusin="setVh()"  @focusout="setVh()"></textarea>
+                    <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1 @focusin="setVhIn()"  @focusout="setVhOut()"></textarea>
                     <div style="border: dashed; margin-bottom: 10px;" ref="send_button">
                         <span class="material-symbols-outlined">
                             send
@@ -91,8 +91,16 @@ export default {
             this.$refs.lobby_chat_textarea.style.height = 'auto'
             this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
         },
-        setVh() {
-            console.log("ggggg");
+        setVhin() {
+            setTimeout(() => {
+                useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, 1000)
+        },
+        setVhOut() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
             }, 1000)
