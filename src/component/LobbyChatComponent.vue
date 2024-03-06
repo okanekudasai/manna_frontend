@@ -95,7 +95,6 @@ export default {
             console.log("ggggg");
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-                console.log(useVhStore().vh);
             }, 1000)
         }
     }

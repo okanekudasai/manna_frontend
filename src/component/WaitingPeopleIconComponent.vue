@@ -53,6 +53,10 @@ export default {
             this.show_lobby_chat_modal = !this.show_lobby_chat_modal;
             if (this.show_lobby_chat_modal) {
                 document.querySelector("body").style.overflow = "hidden";
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             } else {
                 document.querySelector("body").style.overflow = "auto";
             }
