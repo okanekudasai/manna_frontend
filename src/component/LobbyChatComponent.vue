@@ -67,12 +67,12 @@ export default {
             this.vh = useVhStore().vh;
         });
 
-        console.log(this.vh);
-        
+        this.modal_chat();
         this.$refs.lobby_chat_textarea.style.height = 'auto'
         this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
         this.$refs.send_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
         this.$refs.attach_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
+
     },
     methods: {
         close_modal() {
@@ -81,6 +81,8 @@ export default {
         modal_chat() {
             this.modal_type_chat = true;
             this.modal_type_people = false;
+
+            console.log(this.vh);
         },
         modal_people() {
             this.modal_type_chat = false;
@@ -94,13 +96,12 @@ export default {
         setVhIn() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-                document.querySelector("body").style.setProperty("height", useVhStore().vh + "px");
+                document.querySelector("body").style.height = window.visualViewport.height + 'px';
             }, 1000)
         },
         setVhOut() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-                document.querySelector("body").style.removeProperty('height');
             }, 1000)
         }
     }

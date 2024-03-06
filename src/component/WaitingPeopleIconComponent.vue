@@ -30,7 +30,7 @@ export default {
             socket: useSocketStore(),
             icon_height: "45px",
             icon_margin: "12px",
-            show_lobby_chat_modal: true,
+            show_lobby_chat_modal: false,
         }
     },
     created() {
