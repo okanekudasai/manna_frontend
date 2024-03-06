@@ -15,8 +15,7 @@ export default {
     },
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
-            console.log("!!!" + this.vh);
-            this.vh = mutation.events.newValue
+            this.vh = useVhStore().vh;
         })
     },
     methods: {

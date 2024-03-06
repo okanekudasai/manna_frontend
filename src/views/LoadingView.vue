@@ -74,7 +74,7 @@ export default {
     },
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
-            this.vh = mutation.events.newValue
+            this.vh = useVhStore().vh;
         })
     }, 
 }

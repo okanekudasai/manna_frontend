@@ -58,7 +58,7 @@ export default {
     },
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
-            this.vh = mutation.events.newValue
+            this.vh = useVhStore().vh;
         })
         
         this.$refs.lobby_chat_textarea.style.height = 'auto'
