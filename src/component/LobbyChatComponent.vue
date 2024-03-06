@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @wheel="gg">
         <ModalBackground @close_modal="close_modal()"></ModalBackground>
         <div id="content_container" class="flex" style="flex-direction: column;">
             <div class="flex">
@@ -10,9 +10,12 @@
                     대기실
                 </div>
             </div>
-            <div v-if="modal_type_chat" class="main_content_box">
-                <div style="position: absolute; bottom: 0; width: 100%; border: dashed; padding: 0 10px; height: auto;" class="flex">
-                    <textarea id="chat_textarea" type="text" @keydown="ggg()" ref="ta"></textarea>
+            <div v-if="modal_type_chat" class="main_content_box flex" style="flex-direction: column;">
+                <div style="flex-grow: 1; border:dashed;">
+                    sefaef
+                </div>
+                <div style="border: dashed; padding: 0 10px;" class="flex">
+                    <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1></textarea>
                 </div>
             </div>
             <div v-if="modal_type_people" class="main_content_box">
@@ -36,15 +39,26 @@ export default {
             vh: useVhStore().vh,
             modal_type_chat: true,
             modal_type_people: false,
+            input_lobby_chat: '',
         }
     },
     components: {
         ModalBackground,
     },
+    watch: {
+        input_lobby_chat(newValue, oldValue) {
+            console.log(this.$refs.lobby_chat_textarea.style.height);
+            this.$refs.lobby_chat_textarea.style.height = 'auto'
+            this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
+        }
+    },
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
             this.vh = mutation.events.newValue
         })
+        
+        this.$refs.lobby_chat_textarea.style.height = 'auto'
+        this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
     },
     methods: {
         close_modal() {
@@ -58,9 +72,9 @@ export default {
             this.modal_type_chat = false;
             this.modal_type_people = true;
         },
-        ggg() {
-            console.log("ggege");
-            console.log(this.$refs.ta.scrollHeight)
+        gg() {
+            console.log("gggg");
+            event.stopPropagation();
         }
     }
 }
@@ -107,8 +121,20 @@ export default {
 }
 
 #chat_textarea {
-    width: 60%;
     flex-grow: 1;
     resize: none;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    display: block;
+    margin: 10px;
+    min-height: 1.2em;
+    /* height: 1.2em; */
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+
+#chat_textarea:focus {
+    outline: none;
 }
 </style>
