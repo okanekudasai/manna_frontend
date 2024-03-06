@@ -91,7 +91,7 @@ export default {
             this.$refs.lobby_chat_textarea.style.height = 'auto'
             this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
         },
-        setVhin() {
+        setVhIn() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
                 window.scrollTo({
