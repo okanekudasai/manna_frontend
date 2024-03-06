@@ -96,7 +96,7 @@ export default {
         setVhIn() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-                document.querySelector("body").style.height = window.visualViewport.height + 'px';
+                window.scrollY = 0;
             }, 1000)
         },
         setVhOut() {
