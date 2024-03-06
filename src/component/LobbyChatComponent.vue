@@ -65,6 +65,7 @@ export default {
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
             this.vh = useVhStore().vh;
+            console.log(this.vh);
         })
         
         this.$refs.lobby_chat_textarea.style.height = 'auto'
