@@ -43,6 +43,7 @@ export default {
     },
     methods: {
         setScreenSize() {
+            console.log("%%%%");
             this.vhStore.vh = window.innerHeight * 0.01 + 'px';
         }
     },

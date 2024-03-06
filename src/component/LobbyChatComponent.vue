@@ -1,7 +1,7 @@
 <template>
     <div>
         <ModalBackground @close_modal="close_modal()"></ModalBackground>
-        <div id="content_container" class="flex" style="flex-direction: column; z-index: 2;" @wheel="gg">
+        <div id="content_container" class="flex" style="flex-direction: column;" @wheel="gg">
             <div class="flex">
                 <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center" @click="modal_chat()">
                     채팅
@@ -98,12 +98,17 @@ export default {
 @media (max-width: 576px) { 
     #content_container {
         width: 100%;
+        height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin)));
+        z-index: 1000000001;
+        padding: 35px 10px 0px;
     }
 }
 @media (min-width: 576px) { 
     #content_container {
         max-width: 100%;
         width: 600px;
+        height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2) - var(--nav-bar-height));
+        z-index: 2;
     }
 }
 
@@ -111,12 +116,10 @@ export default {
 #content_container {
     position: fixed;
     top: calc(v-bind(base_height) + v-bind(base_margin) * 2);
-    height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2) - var(--nav-bar-height));
     background-color: rgb(250, 250, 250);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     box-shadow: 0 4px 12px 4px rgba(0, 0, 0, 0.185);
-    padding: 35px 10px;
 }
 
 .modal_type {
@@ -136,7 +139,6 @@ export default {
     flex-grow: 1;
     resize: none;
     font-size: 1.2em;
-    line-height: 1.2em;
     display: block;
     margin: 10px;
     max-height: 100px;
