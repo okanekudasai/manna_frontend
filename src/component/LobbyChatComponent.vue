@@ -1,7 +1,7 @@
 <template>
     <div>
         <ModalBackground @close_modal="close_modal()"></ModalBackground>
-        <div id="content_container" class="flex" style="flex-direction: column;" @wheel="gg">
+        <div id="content_container" class="flex" style="flex-direction: column; z-index: 2;" @wheel="gg">
             <div class="flex">
                 <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center" @click="modal_chat()">
                     채팅
@@ -15,10 +15,16 @@
                     sefaef
                 </div>
                 <div style="border: dashed; padding: 0 10px; align-items: end;" class="flex">
-                    <div style="border: dashed; margin-bottom: 10px;" ref="attach_button">첨부</div>
+                    <div style="border: dashed; margin-bottom: 10px;" ref="attach_button" class="flex flex_vertical_center">
+                        <span class="material-symbols-outlined">
+                            attach_file
+                        </span>
+                    </div>
                     <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1></textarea>
                     <div style="border: dashed; margin-bottom: 10px;" ref="send_button">
-                        보내기
+                        <span class="material-symbols-outlined">
+                            send
+                        </span>
                     </div>
                 </div>
             </div>

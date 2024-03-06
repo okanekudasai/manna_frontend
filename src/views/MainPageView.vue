@@ -76,7 +76,8 @@ export default {
     height: 45px;
     background-color: rgba(0, 0, 0, 0.189);
     border-radius: 100px;
-    transition: all 0.2s
+    transition: all 0.2s;
+    z-index: 0;
 }
 
 @media (hover: hover) {

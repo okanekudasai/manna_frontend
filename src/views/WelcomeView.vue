@@ -32,7 +32,7 @@ export default {
         this.$refs.google_login_button.href=`https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&include_granted_scopes=true&response_type=code&client_id=499447616014-auh4g0dedet0p6b7l7n8d8728lronivh.apps.googleusercontent.com&redirect_uri=${import.meta.env.VITE_API_LOGIN_REDIRECT}/mainPage`;
 
         useVhStore().$subscribe((mutation, state) => {
-            this.vh = mutation.events.newValue
+            this.vh = useVhStore().vh;
         })
     }, 
 }
