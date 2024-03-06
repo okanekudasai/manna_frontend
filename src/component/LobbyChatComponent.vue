@@ -97,7 +97,7 @@ export default {
         },
         setVh() {
             console.log("ggggg");
-            useVhStore().vh = window.innerHeight * 0.01 + 'px';
+            useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
             console.log(useVhStore().vh);
         }
     }
