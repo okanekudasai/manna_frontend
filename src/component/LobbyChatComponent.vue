@@ -1,7 +1,7 @@
 <template>
     <div>
         <ModalBackground @close_modal="close_modal()"></ModalBackground>
-        <div id="content_container" class="flex" style="flex-direction: column;" @wheel="gg">
+        <div id="content_container" class="flex" style="flex-direction: column;">
             <div class="flex">
                 <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center" @click="modal_chat()">
                     채팅
@@ -86,10 +86,6 @@ export default {
             this.modal_type_chat = false;
             this.modal_type_people = true;
         },
-        gg() {
-            console.log("gggg");
-            event.preventDefault();
-        },
         setTextAreaHeight() {
             console.log(this.$refs.lobby_chat_textarea.style.height);
             this.$refs.lobby_chat_textarea.style.height = 'auto'
@@ -124,6 +120,8 @@ export default {
         height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2) - var(--nav-bar-height));
         padding: 35px 10px;
         z-index: 2;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
     }
 }
 
@@ -132,8 +130,6 @@ export default {
     position: fixed;
     top: calc(v-bind(base_height) + v-bind(base_margin) * 2);
     background-color: rgb(250, 250, 250);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
     box-shadow: 0 4px 12px 4px rgba(0, 0, 0, 0.185);
 }
 

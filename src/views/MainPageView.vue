@@ -57,7 +57,12 @@ export default {
                 top: 0,
                 behavior: 'smooth'
             });
-        }
+        },
+        // set_fix_height(on) {
+        //     if (on) {
+        //         this.$refs.main_page_container.style.overflow = "hidden";
+        //     }
+        // }
     }
 }
 </script>

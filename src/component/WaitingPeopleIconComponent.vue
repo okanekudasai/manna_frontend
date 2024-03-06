@@ -51,6 +51,11 @@ export default {
     methods: {
         get_waiting_people_button_click() {
             this.show_lobby_chat_modal = !this.show_lobby_chat_modal;
+            if (this.show_lobby_chat_modal) {
+                document.querySelector("body").style.overflow = "hidden";
+            } else {
+                document.querySelector("body").style.overflow = "auto";
+            }
         }
     }
 }
