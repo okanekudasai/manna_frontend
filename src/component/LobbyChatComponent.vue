@@ -96,7 +96,10 @@ export default {
         setVhIn() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
+                setTimeout(() => {
+                    
                 window.scrollY = 0;
+                }, 1000)
             }, 1000)
         },
         setVhOut() {
