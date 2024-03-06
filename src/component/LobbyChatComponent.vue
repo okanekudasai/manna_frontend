@@ -115,7 +115,8 @@ export default {
 @media (max-width: 576px) { 
     #content_container {
         width: 100%;
-        height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2));
+        /* height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2)); */
+        bottom: 0;
         z-index: 1000000001;
         padding: 35px 10px 0px;
     }
@@ -124,7 +125,8 @@ export default {
     #content_container {
         max-width: 100%;
         width: 600px;
-        height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2) - var(--nav-bar-height));
+        /* height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2) - var(--nav-bar-height)); */
+        bottom: var(--nav-bar-height);
         padding: 35px 10px;
         z-index: 2;
         border-top-right-radius: 20px;
