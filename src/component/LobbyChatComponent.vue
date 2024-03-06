@@ -96,16 +96,15 @@ export default {
         setVhIn() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-                setTimeout(() => {
-                    
-                window.scrollY = 0;
-                }, 1000)
-            }, 1000)
+                console.log("ggggg");
+                document.querySelector("#main_page_container").style.height = window.visualViewport.height + 'px';
+                document.querySelector("#main_page_container").style.overflow = "hidden"
+            }, 500)
         },
         setVhOut() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-            }, 1000)
+            }, 500)
         }
     }
 }

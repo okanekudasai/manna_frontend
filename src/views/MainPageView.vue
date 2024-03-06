@@ -58,17 +58,15 @@ export default {
                 behavior: 'smooth'
             });
         },
-        // set_fix_height(on) {
-        //     if (on) {
-        //         this.$refs.main_page_container.style.overflow = "hidden";
-        //     }
-        // }
+        set_fix_height(on) {
+            alert("ggggggg!!!");
+        }
     }
 }
 </script>
 <style scoped>
 #main_page_container {
-    min-height: calc(v-bind(vh) * 100);
+    /* min-height: calc(v-bind(vh) * 100); */
     position: relative;
 }
 
