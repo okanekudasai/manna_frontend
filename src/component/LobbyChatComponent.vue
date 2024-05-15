@@ -79,8 +79,9 @@ export default {
         this.$refs.send_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
         this.$refs.attach_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
 
-        this.stand = window.scrollY;
-        window.addEventListener("scroll", this.handle_scroll);
+        
+        // this.stand = window.scrollY;
+        // window.addEventListener("scroll", this.handle_scroll);
 
         // window.visualViewport.onresize = () => {
         //     this.changeHeight();
@@ -98,7 +99,7 @@ export default {
         handle_scroll() {
             console.log("움직임")
             console.log(window.scrollY);
-            window.scrollTo(0, 0);
+            window.scrollTo(0, this.stand);
         },
         modal_chat() {
             this.modal_type_chat = true;
