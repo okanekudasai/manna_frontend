@@ -1,7 +1,7 @@
 <template>
     <div id="loading_view_container" :class="{hide: hide || $route.name != 'welcome'}">
     <!-- <div id="loading_view_container" @click="ggg()" class="hover_pointer"> -->
-        로딩화면
+        로딩화면!
     </div>
 </template>
 
@@ -75,6 +75,7 @@ export default {
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
             this.vh = useVhStore().vh;
+            console.log(this.vh);
         })
     }, 
 }
@@ -83,9 +84,9 @@ export default {
 <style scoped>
 #loading_view_container {
     position: fixed;
-    z-index: 1;
+    z-index: 100000;
     width: 100vw;
-    background: rgb(255, 255, 255);
+    background: rgba(110, 18, 18, 0.5);
     height:calc(v-bind(vh) * 100);
 }
 </style>

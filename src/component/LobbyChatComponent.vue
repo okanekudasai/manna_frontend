@@ -61,6 +61,12 @@ export default {
             
         }
     },
+    created() {
+        window.addEventListener('popstate', function(event) {
+            event.preventDefault();
+            
+        })
+    }, 
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
             console.log(this.vh);
@@ -105,6 +111,7 @@ export default {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
             }, 1000)
         }
+        
     }
 }
 </script>
