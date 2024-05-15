@@ -94,7 +94,8 @@ export default {
             this.$emit('close_lobby_chat_modal');
             window.removeEventListener("scroll", this.handle_scroll)
         },
-        handle_scroll() {
+        handle_scroll(e) {
+            console.log(e)
             // console.log(window.scrollY);
             // // document.querySelector("#waiting_people_box").style.transform = `translateY(${window.scrollY}px)`;
             // document.querySelector("#lobby_chat_content_container").style.bottom = '0';
