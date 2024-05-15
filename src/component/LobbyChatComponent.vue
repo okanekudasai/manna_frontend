@@ -91,8 +91,9 @@ export default {
             console.log("바뀜!!!");
             let viewportHeight = window.visualViewport.height; // viewport 의 높이
             console.log("화면높이 " + viewportHeight);
-            useVhStore().vh = (viewportHeight * 0.01) + "px";
+            this.vh = (viewportHeight * 0.01) + "px";
             console.log(useVhStore().vh);
+            
         },
         close_modal() {
             this.$emit('close_lobby_chat_modal');
