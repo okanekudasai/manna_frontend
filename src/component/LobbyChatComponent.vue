@@ -100,9 +100,7 @@ export default {
         handle_start_touch(e) {
             console.log(e);
             this.touch_start = e.touches[0].clientY;
-        }
-
-        ,
+        },
         handle_touch_direction(event) {
             console.log(event)
             let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -141,8 +139,6 @@ export default {
                     document.querySelector("#profile_notification_container").style.transform = '';
                 }
             }
-        }
-
         },
         close_modal() {
             this.$emit('close_lobby_chat_modal');
