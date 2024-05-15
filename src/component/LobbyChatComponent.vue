@@ -93,9 +93,13 @@ export default {
             window.removeEventListener("scroll", this.handle_scroll)
         },
         handle_scroll() {
-            console.log(window.scrollY);
-            // document.querySelector("#waiting_people_box").style.transform = `translateY(${window.scrollY}px)`;
-            document.querySelector("#lobby_chat_content_container").style.bottom = '0';
+            // console.log(window.scrollY);
+            // // document.querySelector("#waiting_people_box").style.transform = `translateY(${window.scrollY}px)`;
+            // document.querySelector("#lobby_chat_content_container").style.bottom = '0';
+            let documentHeight = document.documentElement.clientHeight;
+            let viewportHeight = window.visualViewport.height;
+            let keyboardHeight = documentHeight - viewportHeight + 1;
+            document.getElementById('lobby_chat_content_container').style.bottom = keyboardHeight + "px"
         },
         modal_chat() {
             this.modal_type_chat = true;
