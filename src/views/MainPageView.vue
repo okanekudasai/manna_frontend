@@ -37,18 +37,26 @@ export default {
         }
     },
     mounted() {
-        
+        window.visualViewport.onresize = () => {
+            this.changeHeight();
+        }
         useVhStore().$subscribe((mutation, state) => {
             this.vh = useVhStore().vh;
         })
 
         window.addEventListener('scroll', this.handleScroll);
         this.scroll_needed_position = this.$refs.info_box.offsetHeight;
+
     },
     beforeDestroy() {
         window.removeEventListener('scroll', this.handleScroll);
     },
     methods: {
+        changeHeight() {
+            console.log("바뀜!!!");
+            let viewportHeight = window.visualViewport.height; // viewport 의 높이
+            this.vh = (viewportHeight * 0.01) + "px";
+        },
         handleScroll() {
             this.isScrolled = window.scrollY < this.scroll_needed_position;
         },
