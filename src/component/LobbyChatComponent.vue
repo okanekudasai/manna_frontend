@@ -93,8 +93,8 @@ export default {
             window.removeEventListener("scroll", this.handle_scroll)
         },
         handle_scroll() {
-            console.log("바뀜")
-            document.querySelector("#waiting_people_box").style.top = window.scrollY;
+            console.log(window.scrollY);
+            document.querySelector("#waiting_people_box").style.top = window.scrollY + 'px';
         },
         modal_chat() {
             this.modal_type_chat = true;
