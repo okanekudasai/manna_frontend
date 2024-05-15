@@ -110,7 +110,7 @@ export default {
                     console.log('터치드래그 방향: 아래로');
                     chat_container.style.bottom = 0;
                     document.querySelector("#waiting_people_box").style.transfrom = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
-                } else if (currentY < this.touch_start) {
+                } else {
                     console.log('터치드래그 방향: 위로');
                     chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
                     document.querySelector("#waiting_people_box").style.transfrom = 0;
