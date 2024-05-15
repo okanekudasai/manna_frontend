@@ -55,6 +55,7 @@ export default {
             modal_type_people: false,
             input_lobby_chat: '',
             stand: 0,
+            keyboardHeight: 0,
         }
     },
     components: {
@@ -71,6 +72,9 @@ export default {
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
             this.vh = useVhStore().vh;
+            let documentHeight = document.documentElement.clientHeight;
+            let viewportHeight = this.vh;
+            this.keyboardHeight = documentHeight - viewportHeight + 1;
         });
 
         this.modal_chat();
@@ -79,9 +83,10 @@ export default {
         this.$refs.send_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
         this.$refs.attach_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
 
-        
+        window.addEventListener("", (e) => {e.preventDefault(); console.log("gggg")});
+
         // this.stand = window.scrollY;
-        window.addEventListener("scroll", this.handle_scroll);
+        // window.addEventListener("scroll", this.handle_scroll);
 
         // window.visualViewport.onresize = () => {
         //     this.changeHeight();
@@ -139,8 +144,8 @@ export default {
 @media (max-width: 576px) {
     #lobby_chat_content_container {
         width: 100%;
-        height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2));
-        /* bottom: 0; */
+        /* height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2)); */
+        bottom: v-bind(keyboardHeight);
         z-index: 1000000001;
         padding: 35px 10px 0px;
     }
