@@ -95,9 +95,13 @@ export default {
                 if (e.deltaY > 0) {
                     console.log('휠 방향: 아래로');
                     chat_container.style.bottom = 0;
+                    document.querySelector("#waiting_people_box").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
+                    document.querySelector("#profile_notification_container").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
                 } else if (e.deltaY < 0) {
                     console.log('휠 방향: 위로');
                     chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
+                    document.querySelector("#waiting_people_box").style.transform = '';
+                    document.querySelector("#profile_notification_container").style.transform = '';
                 }
             }
         });
@@ -115,11 +119,13 @@ export default {
                 if (currentY > this.touch_start) {
                     console.log('터치드래그 방향: 아래로');
                     chat_container.style.bottom = 0;
-                    document.querySelector("#waiting_people_box").style.transfrom = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
+                    document.querySelector("#waiting_people_box").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
+                    document.querySelector("#profile_notification_container").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
                 } else {
                     console.log('터치드래그 방향: 위로');
                     chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
-                    document.querySelector("#waiting_people_box").style.transfrom = 0;
+                    document.querySelector("#waiting_people_box").style.transform = '';
+                    document.querySelector("#profile_notification_container").style.transform = '';
                 }
             }
         });
@@ -132,6 +138,8 @@ export default {
         close_modal() {
             this.$emit('close_lobby_chat_modal');
             document.getElementById('lobby_chat_content_container').style.bottom = 0;
+            document.querySelector("#waiting_people_box").style.transform = '';
+            document.querySelector("#profile_notification_container").style.transform = '';
             window.removeEventListener("scroll", this.handle_scroll)
         },
         handle_scroll(e) {
@@ -150,11 +158,13 @@ export default {
                 chat_container.style.bottom = 0;
                 this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
                 document.querySelector("#waiting_people_box").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
+                document.querySelector("#profile_notification_container").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
             } else if (currentScrollTop < this.lastH) {
                 console.log('스크롤이 위로 올라갑니다.');
                 chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
                 this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
                 document.querySelector("#waiting_people_box").style.transform = '';
+                document.querySelector("#profile_notification_container").style.transform = '';
             }
         },
         modal_chat() {
