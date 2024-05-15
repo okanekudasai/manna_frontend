@@ -81,7 +81,7 @@ export default {
 
         
         // this.stand = window.scrollY;
-        window.visualViewport.addEventListener("scroll", this.handle_scroll);
+        window.addEventListener("scroll", this.handle_scroll);
 
         // window.visualViewport.onresize = () => {
         //     this.changeHeight();
@@ -90,12 +90,11 @@ export default {
     methods: {
         close_modal() {
             this.$emit('close_lobby_chat_modal');
-            window.visualViewport.removeEventListener("scroll", this.handle_scroll)
+            window.removeEventListener("scroll", this.handle_scroll)
         },
         handle_scroll() {
-            console.log("움직임")
-            console.log(window.scrollY);
-            window.scrollTo(0, window.visualViewport.scrollTop + this.stand);
+            console.log("바뀜")
+            document.querySelector("#waiting_people_box").style.top = window.scrollY;
         },
         modal_chat() {
             this.modal_type_chat = true;
