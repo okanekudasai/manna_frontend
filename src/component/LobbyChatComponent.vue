@@ -110,7 +110,7 @@ export default {
             if (currentScrollTop == this.lastH) {
                 let currentY = event.touches[0].clientY;
                 console.log(currentY)
-                if (currentY > this.touch_start) {
+                if (currentY < this.touch_start) {
                     console.log('터치드래그 방향: 아래로');
                     chat_container.style.bottom = 0;
                     document.querySelector("#waiting_people_box").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
