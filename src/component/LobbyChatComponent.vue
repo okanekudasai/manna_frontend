@@ -81,6 +81,7 @@ export default {
 
         window.visualViewport.onresize = () => {
             console.log("바뀜!!!");
+            console.log(window.visualViewport)
         }
     },
     methods: {
