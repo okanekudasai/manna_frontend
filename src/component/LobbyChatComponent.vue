@@ -82,7 +82,7 @@ export default {
         // window.addEventListener("scroll", (e) => {e.preventDefault(); console.log("gggg")});
 
         // this.stand = window.scrollY;
-        // window.addEventListener("scroll", this.handle_scroll);
+        window.addEventListener("scroll", this.handle_scroll);
 
         // window.visualViewport.onresize = () => {
         //     this.changeHeight();
@@ -97,10 +97,10 @@ export default {
             // console.log(window.scrollY);
             // // document.querySelector("#waiting_people_box").style.transform = `translateY(${window.scrollY}px)`;
             // document.querySelector("#lobby_chat_content_container").style.bottom = '0';
-            let documentHeight = document.documentElement.clientHeight;
-            let viewportHeight = window.visualViewport.height;
-            let keyboardHeight = documentHeight - viewportHeight + 1;
-            document.getElementById('lobby_chat_content_container').style.bottom = keyboardHeight + "px"
+            // let documentHeight = document.documentElement.clientHeight;
+            // let viewportHeight = window.visualViewport.height;
+            // let keyboardHeight = documentHeight - viewportHeight + 1;
+            document.getElementById('lobby_chat_content_container').style.top = window.visualViewport.offsetTop + "px"
         },
         modal_chat() {
             this.modal_type_chat = true;
