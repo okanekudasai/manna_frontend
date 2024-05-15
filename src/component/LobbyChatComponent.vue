@@ -81,25 +81,21 @@ export default {
 
         
         // this.stand = window.scrollY;
-        // window.addEventListener("scroll", this.handle_scroll);
+        window.visualViewport.addEventListener("scroll", this.handle_scroll);
 
         // window.visualViewport.onresize = () => {
         //     this.changeHeight();
         // }
     },
     methods: {
-        // changeHeight() {
-        //     let viewportHeight = window.visualViewport.height; // viewport 의 높이
-        //     this.vh = (viewportHeight * 0.01) + "px";
-        // },
         close_modal() {
             this.$emit('close_lobby_chat_modal');
-            window.removeEventListener("scroll", this.handle_scroll)
+            window.visualViewport.removeEventListener("scroll", this.handle_scroll)
         },
         handle_scroll() {
             console.log("움직임")
             console.log(window.scrollY);
-            window.scrollTo(0, this.stand);
+            window.visualViewport.scrollTo(0, this.stand);
         },
         modal_chat() {
             this.modal_type_chat = true;
