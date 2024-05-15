@@ -82,15 +82,15 @@ export default {
 
         let documentHeight = document.documentElement.clientHeight;
 
-        window.visualViewport.onresize = () => {
-            this.changeHeight();
-        }
+        // window.visualViewport.onresize = () => {
+        //     this.changeHeight();
+        // }
     },
     methods: {
-        changeHeight() {
-            let viewportHeight = window.visualViewport.height; // viewport 의 높이
-            this.vh = (viewportHeight * 0.01) + "px";
-        },
+        // changeHeight() {
+        //     let viewportHeight = window.visualViewport.height; // viewport 의 높이
+        //     this.vh = (viewportHeight * 0.01) + "px";
+        // },
         close_modal() {
             this.$emit('close_lobby_chat_modal');
         },
