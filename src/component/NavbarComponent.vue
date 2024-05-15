@@ -65,6 +65,7 @@ export default {
         useVhStore().$subscribe((mutation, state) => {
             this.vh = useVhStore().vh;
         })
+        console.log(this.vh);
     },
     methods: {
         toggle_show_friend_list() {
@@ -100,7 +101,10 @@ export default {
     background-color: rgb(244, 244, 244);
     height: var(--nav-bar-height);
     position: fixed;
-    top: calc(v-bind(vh) - var(--nav-bar-height));
+    /* bottom: calc(v-bind(vh) - var(--nav-bar-height)); */
+    /* top: calc(v-bind(vh*100) - var(--nav-bar-height)); */
+    /* bottom: 0; */
+    top: calc(v-bind(vh) * 100 - var(--nav-bar-height));
     width: 100%;
     box-shadow: 0 -3px 8px 2px rgba(0, 0, 0, 0.08);
     transition: all 0.2s;
