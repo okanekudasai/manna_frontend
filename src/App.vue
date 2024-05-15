@@ -55,6 +55,7 @@ export default {
         },
         setScreenSize() {
             console.log("스크린사이즈도 바뀜");
+            if (window.innerHeight != window.visualViewport.height) return;
             this.vhStore.vh = window.innerHeight * 0.01 + 'px';
         }
     },
