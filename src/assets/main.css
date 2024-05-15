@@ -17,3 +17,7 @@ html {
 label {
     cursor: inherit;
 }
+
+body {
+    overflow: auto;
+}
