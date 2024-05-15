@@ -106,6 +106,7 @@ export default {
                 document.querySelector("#waiting_people_box").style.transfrom = 0;
             } else {
                 let currentY = event.touches[0].clientY;
+                console.log(currentY)
                 if (currentY > this.touch_start) {
                     console.log('터치드래그 방향: 아래로');
                     chat_container.style.bottom = 0;
