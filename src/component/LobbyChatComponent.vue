@@ -95,7 +95,7 @@ export default {
         handle_scroll() {
             console.log("움직임")
             console.log(window.scrollY);
-            window.visualViewport.scrollTo(0, this.stand);
+            window.scrollTo(0, window.visualViewport.scrollTop + this.stand);
         },
         modal_chat() {
             this.modal_type_chat = true;
