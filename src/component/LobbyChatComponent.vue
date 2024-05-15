@@ -74,7 +74,7 @@ export default {
             this.vh = useVhStore().vh;
             let documentHeight = document.documentElement.clientHeight;
             let viewportHeight = this.vh;
-            this.keyboardHeight = documentHeight - viewportHeight + 1;
+            this.keyboardHeight = (documentHeight - viewportHeight + 1) + 'px';
         });
 
         this.modal_chat();
