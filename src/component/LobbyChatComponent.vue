@@ -94,8 +94,8 @@ export default {
         },
         handle_scroll() {
             console.log(window.scrollY);
-            document.querySelector("#waiting_people_box").style.transform = `translateY(${window.scrollY}px)`;
-            document.querySelector("#lobby_chat_content_container").style.transform = `translateY(${window.scrollY}px)`;
+            // document.querySelector("#waiting_people_box").style.transform = `translateY(${window.scrollY}px)`;
+            document.querySelector("#lobby_chat_content_container").style.bottom = '0';
         },
         modal_chat() {
             this.modal_type_chat = true;
