@@ -51,7 +51,7 @@ export default {
         changeHeight() {
             console.log("바뀜!!!");
             let viewportHeight = window.visualViewport.height; // viewport 의 높이
-            vhStore().vh = (viewportHeight * 0.01) + "px";
+            useVhStore().vh = (viewportHeight * 0.01) + "px";
         },
         setScreenSize() {
             this.vhStore.vh = window.innerHeight * 0.01 + 'px';
