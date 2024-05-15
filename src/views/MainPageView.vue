@@ -38,7 +38,7 @@ export default {
     },
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
-            this.vh = useVhStore().vh;
+            
         })
 
         window.addEventListener('scroll', this.handleScroll);
