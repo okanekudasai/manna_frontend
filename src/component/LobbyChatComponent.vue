@@ -149,12 +149,12 @@ export default {
                 console.log('스크롤이 아래로 내려갑니다.');
                 chat_container.style.bottom = 0;
                 this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
-                document.querySelector("#waiting_people_box").style.transfrom = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
+                document.querySelector("#waiting_people_box").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
             } else if (currentScrollTop < this.lastH) {
                 console.log('스크롤이 위로 올라갑니다.');
                 chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
                 this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
-                document.querySelector("#waiting_people_box").style.transfrom = 0;
+                document.querySelector("#waiting_people_box").style.transform = 0;
             }
         },
         modal_chat() {
