@@ -50,6 +50,7 @@ export default {
     },
     data() {
         return {
+            totalH: 0,
             vh: useVhStore().vh,
             modal_type_chat: true,
             modal_type_people: false,
@@ -100,7 +101,7 @@ export default {
             // let documentHeight = document.documentElement.clientHeight;
             // let viewportHeight = window.visualViewport.height;
             // let keyboardHeight = documentHeight - viewportHeight + 1;
-            document.getElementById('lobby_chat_content_container').style.top = window.visualViewport.offsetTop + "px"
+            document.getElementById('lobby_chat_content_container').style.bottom = (document.documentElement.clientHeight == window.visualViewport.height) ? 0 : document.documentElement.clientHeight-window.visualViewport.height
         },
         modal_chat() {
             this.modal_type_chat = true;
@@ -141,7 +142,7 @@ export default {
     #lobby_chat_content_container {
         width: 100%;
         height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2));
-        /* bottom: 0; */
+        bottom: 0;
         z-index: 1000000001;
         padding: 35px 10px 0px;
     }
@@ -152,7 +153,7 @@ export default {
         max-width: 100%;
         width: 600px;
         height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2) - var(--nav-bar-height));
-        /* bottom: var(--nav-bar-height); */
+        bottom: var(--nav-bar-height);
         padding: 35px 10px;
         z-index: 2;
         border-top-right-radius: 20px;
@@ -163,7 +164,7 @@ export default {
 
 #lobby_chat_content_container {
     position: fixed;
-    top: calc(v-bind(base_height) + v-bind(base_margin) * 2);
+    /* top: calc(v-bind(base_height) + v-bind(base_margin) * 2); */
     background-color: rgb(250, 250, 250);
     box-shadow: 0 4px 12px 4px rgba(0, 0, 0, 0.185);
 }
