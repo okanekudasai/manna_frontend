@@ -98,12 +98,12 @@ export default {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
                 document.querySelector("body").style.height = window.visualViewport.height + 'px';
                 document.querySelector("body").style.overflow = "hidden"
-            }, 5000)
+            }, 1000)
         },
         setVhOut() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-            }, 5000)
+            }, 1000)
         }
     }
 }
