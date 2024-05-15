@@ -154,7 +154,7 @@ export default {
                 console.log('스크롤이 위로 올라갑니다.');
                 chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
                 this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
-                document.querySelector("#waiting_people_box").style.transform = 0;
+                document.querySelector("#waiting_people_box").style.transform = '';
             }
         },
         modal_chat() {
