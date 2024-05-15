@@ -64,7 +64,7 @@ export default {
     created() {
         window.addEventListener('popstate', function(event) {
             event.preventDefault();
-            
+            this.close_modal();
         })
     }, 
     mounted() {
@@ -104,12 +104,12 @@ export default {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
                 document.querySelector("body").style.height = window.visualViewport.height + 'px';
                 document.querySelector("body").style.overflow = "hidden"
-            }, 1000)
+            }, 2000)
         },
         setVhOut() {
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-            }, 1000)
+            }, 2000)
         }
         
     }
