@@ -87,24 +87,29 @@ export default {
         this.lastH = window.pageYOffset;
         // window.addEventListener("scroll", this.handle_scroll);
 
-        window.addEventListener("wheel", this.handle_scroll);
+        window.addEventListener("scroll", this.handle_scroll);
+        window.addEventListener("wheel", (e) => {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let chat_container = document.getElementById('lobby_chat_content_container');
+            if (currentScrollTop == this.lastH) {
+                if (e.deltaY > 0) {
+                    console.log('휠 방향: 아래로');
+                    chat_container.style.bottom = 0;
+                } else if (e.deltaY < 0) {
+                    console.log('휠 방향: 위로');
+                    chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
+                }
+            }
+        });
         window.addEventListener("touchstart", (e) => {
             this.touch_start = e.touches[0].clientY;
         })
         window.addEventListener('touchmove', function (event) {
             let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
             let chat_container = document.getElementById('lobby_chat_content_container');
-            if (currentScrollTop > this.lastH) {
-                console.log('스크롤이 아래로 내려갑니다.');
-                chat_container.style.bottom = 0;
-                this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
-                document.querySelector("#waiting_people_box").style.transfrom = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
-            } else if (currentScrollTop < this.lastH) {
-                console.log('스크롤이 위로 올라갑니다.');
-                chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
-                this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
-                document.querySelector("#waiting_people_box").style.transfrom = 0;
-            } else {
+            console.log(this.touch_start, event.touches[0].clientY);
+            console.log()
+            if (currentScrollTop == this.lastH) {
                 let currentY = event.touches[0].clientY;
                 console.log(currentY)
                 if (currentY > this.touch_start) {
@@ -130,7 +135,7 @@ export default {
             window.removeEventListener("scroll", this.handle_scroll)
         },
         handle_scroll(e) {
-            console.log(e)
+            console.log("!!!!!" + e)
             // console.log(window.scrollY);
             // // document.querySelector("#waiting_people_box").style.transform = `translateY(${window.scrollY}px)`;
             // document.querySelector("#lobby_chat_content_container").style.bottom = '0';
@@ -148,16 +153,7 @@ export default {
                 console.log('스크롤이 위로 올라갑니다.');
                 chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
                 this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
-            } else {
-                if (e.deltaY > 0) {
-                    console.log('휠 방향: 아래로');
-                    chat_container.style.bottom = 0;
-                } else if (e.deltaY < 0) {
-                    console.log('휠 방향: 위로');
-                    chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
-                }
             }
-
         },
         modal_chat() {
             this.modal_type_chat = true;
