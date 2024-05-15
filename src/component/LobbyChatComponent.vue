@@ -79,12 +79,20 @@ export default {
         this.$refs.send_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
         this.$refs.attach_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
 
+
+        let documentHeight = document.documentElement.clientHeight;
+
         window.visualViewport.onresize = () => {
-            console.log("바뀜!!!");
-            console.log(window.visualViewport)
+            this.changeHeight();
         }
     },
     methods: {
+        changeHeight() {
+            console.log("바뀜!!!");
+            let viewportHeight = window.visualViewport.height; // viewport 의 높이
+            console.log("화면높이 " + viewportHeight);
+
+        },
         close_modal() {
             this.$emit('close_lobby_chat_modal');
         },
@@ -104,17 +112,17 @@ export default {
             this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
         },
         setVhIn() {
-            setTimeout(() => {
-                useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-                document.querySelector("body").style.height = window.visualViewport.height + 'px';
-                document.querySelector("body").style.overflow = "hidden"
+            // setTimeout(() => {
+            //     useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
+            //     document.querySelector("body").style.height = window.visualViewport.height + 'px';
+            //     document.querySelector("body").style.overflow = "hidden"
                 
-            }, 500)
+            // }, 500)
         },
         setVhOut() {
-            setTimeout(() => {
-                useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-            }, 500)
+            // setTimeout(() => {
+            //     useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
+            // }, 500)
         }
 
     }
