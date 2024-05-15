@@ -35,11 +35,11 @@ export default {
 
         
         this.vhStore.vh = window.innerHeight * 0.01 + 'px';
-        window.addEventListener('resize', this.setScreenSize);
+        // window.addEventListener('resize', this.setScreenSize);
     },
     
     beforeDestroy() {
-        window.removeEventListener('resize', this.setScreenSize);
+        window.visualViewport.removeEventListener('resize', this.setScreenSize);
     },
     mounted() {
         window.visualViewport.onresize = () => {

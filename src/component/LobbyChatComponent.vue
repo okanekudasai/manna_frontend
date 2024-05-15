@@ -54,6 +54,7 @@ export default {
             modal_type_chat: true,
             modal_type_people: false,
             input_lobby_chat: '',
+            stand: 0,
         }
     },
     components: {
@@ -78,8 +79,8 @@ export default {
         this.$refs.send_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
         this.$refs.attach_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
 
-
-        let documentHeight = document.documentElement.clientHeight;
+        this.stand = window.scrollY;
+        window.addEventListener("scroll", this.handle_scroll);
 
         // window.visualViewport.onresize = () => {
         //     this.changeHeight();
@@ -92,6 +93,12 @@ export default {
         // },
         close_modal() {
             this.$emit('close_lobby_chat_modal');
+            window.removeEventListener("scroll", this.handle_scroll)
+        },
+        handle_scroll() {
+            console.log("움직임")
+            console.log(window.scrollY);
+            window.scrollTo(0, this.stand);
         },
         modal_chat() {
             this.modal_type_chat = true;
