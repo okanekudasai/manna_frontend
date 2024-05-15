@@ -1,7 +1,7 @@
 <template>
     <div>
         <ModalBackground @close_modal="close_modal()"></ModalBackground>
-        <div id="content_container" class="flex" style="flex-direction: column;">
+        <div id="lobby_chat_content_container" class="flex" style="flex-direction: column;">
             <div class="flex">
                 <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center"
                     @click="modal_chat()">
@@ -94,7 +94,8 @@ export default {
         },
         handle_scroll() {
             console.log(window.scrollY);
-            document.querySelector("#waiting_people_box").style.top = window.scrollY + 'px';
+            document.querySelector("#waiting_people_box").style.transform = `translateY(${window.scrollY}px)`;
+            document.querySelector("#lobby_chat_content_container").style.transform = `translateY(${window.scrollY}px)`;
         },
         modal_chat() {
             this.modal_type_chat = true;
@@ -132,7 +133,7 @@ export default {
 <style scoped>
 /* 모바일 */
 @media (max-width: 576px) {
-    #content_container {
+    #lobby_chat_content_container {
         width: 100%;
         height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2));
         /* bottom: 0; */
@@ -142,7 +143,7 @@ export default {
 }
 
 @media (min-width: 576px) {
-    #content_container {
+    #lobby_chat_content_container {
         max-width: 100%;
         width: 600px;
         height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2) - var(--nav-bar-height));
@@ -155,7 +156,7 @@ export default {
 }
 
 
-#content_container {
+#lobby_chat_content_container {
     position: fixed;
     top: calc(v-bind(base_height) + v-bind(base_margin) * 2);
     background-color: rgb(250, 250, 250);
