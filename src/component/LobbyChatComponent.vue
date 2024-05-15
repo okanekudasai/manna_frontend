@@ -84,7 +84,9 @@ export default {
 
         // this.stand = window.scrollY;
         this.lastH = window.pageYOffset;
-        window.addEventListener("scroll", this.handle_scroll);
+        // window.addEventListener("scroll", this.handle_scroll);
+
+        window.addEventListener("wheel", this.handle_scroll);
 
         // window.visualViewport.onresize = () => {
         //     this.changeHeight();
@@ -93,6 +95,7 @@ export default {
     methods: {
         close_modal() {
             this.$emit('close_lobby_chat_modal');
+            document.getElementById('lobby_chat_content_container').style.bottom = 0;
             window.removeEventListener("scroll", this.handle_scroll)
         },
         handle_scroll(e) {
@@ -109,12 +112,21 @@ export default {
             if (currentScrollTop > this.lastH) {
                 console.log('스크롤이 아래로 내려갑니다.');
                 chat_container.style.bottom = 0;
-            } else {
+                this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
+            } else if (currentScrollTop < this.lastH) {
                 console.log('스크롤이 위로 올라갑니다.');
-                chat_container.style.bottom = (document.documentElement.clientHeight-window.visualViewport.height) + 'px';
+                chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
+                this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
+            } else {
+                if (e.deltaY > 0) {
+                    console.log('휠 방향: 아래로');
+                    chat_container.style.bottom = 0;
+                } else if (e.deltaY < 0) {
+                    console.log('휠 방향: 위로');
+                    chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
+                }
             }
 
-            this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
         },
         modal_chat() {
             this.modal_type_chat = true;
