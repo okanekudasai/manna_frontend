@@ -3,10 +3,12 @@
         <ModalBackground @close_modal="close_modal()"></ModalBackground>
         <div id="content_container" class="flex" style="flex-direction: column;">
             <div class="flex">
-                <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center" @click="modal_chat()">
+                <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center"
+                    @click="modal_chat()">
                     채팅
                 </div>
-                <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center" @click="modal_people()">
+                <div class="hover_pointer modal_type flex flex_vertical_center flex_horizontal_center"
+                    @click="modal_people()">
                     대기실
                 </div>
             </div>
@@ -15,12 +17,14 @@
                     sefaef
                 </div>
                 <div style="border: dashed; padding: 0 10px; align-items: end;" class="flex">
-                    <div style="border: dashed; margin-bottom: 10px;" ref="attach_button" class="flex flex_vertical_center">
+                    <div style="border: dashed; margin-bottom: 10px;" ref="attach_button"
+                        class="flex flex_vertical_center">
                         <span class="material-symbols-outlined">
                             attach_file
                         </span>
                     </div>
-                    <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1 @focusin="setVhIn()"  @focusout="setVhOut()"></textarea>
+                    <textarea id="chat_textarea" type="text" v-model="input_lobby_chat" ref="lobby_chat_textarea" rows=1
+                        @focusin="setVhIn()" @focusout="setVhOut()"></textarea>
                     <div style="border: dashed; margin-bottom: 10px;" ref="send_button">
                         <span class="material-symbols-outlined">
                             send
@@ -58,15 +62,11 @@ export default {
     watch: {
         input_lobby_chat(newValue, oldValue) {
             this.setTextAreaHeight();
-            
+
         }
     },
     created() {
-        window.addEventListener('popstate', function(event) {
-            event.preventDefault();
-            this.close_modal();
-        })
-    }, 
+    },
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
             console.log(this.vh);
@@ -100,26 +100,39 @@ export default {
             this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
         },
         setVhIn() {
+            window.addEventListener('scroll', function () {
+                var scrollPosition = window.scrollY || window.pageYOffset;
+                var fixedElement = document.querySelector('.scroll-content');
+
+                if (scrollPosition > 0) {
+                    fixedElement.style.position = 'fixed';
+                    fixedElement.style.top = '0';
+                    // 필요에 따라 다른 스타일링 추가
+                } else {
+                    fixedElement.style.position = 'relative';
+                    // 필요에 따라 다른 스타일링 추가
+                }
+            });
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
                 document.querySelector("body").style.height = window.visualViewport.height + 'px';
                 document.querySelector("body").style.overflow = "hidden"
-            }, 2000)
+            }, 500)
         },
         setVhOut() {
+            window.removeEventListener('scroll');
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
-            }, 2000)
+            }, 500)
         }
-        
+
     }
 }
 </script>
 
 <style scoped>
-
 /* 모바일 */
-@media (max-width: 576px) { 
+@media (max-width: 576px) {
     #content_container {
         width: 100%;
         height: calc(v-bind(vh) * 100 - (v-bind(base_height) + v-bind(base_margin) * 2));
@@ -128,7 +141,8 @@ export default {
         padding: 35px 10px 0px;
     }
 }
-@media (min-width: 576px) { 
+
+@media (min-width: 576px) {
     #content_container {
         max-width: 100%;
         width: 600px;
@@ -170,8 +184,10 @@ export default {
     margin: 10px;
     max-height: 100px;
     /* height: 1.2em; */
-    -ms-overflow-style: none; /* 인터넷 익스플로러 */
-    scrollbar-width: none; /* 파이어폭스 */
+    -ms-overflow-style: none;
+    /* 인터넷 익스플로러 */
+    scrollbar-width: none;
+    /* 파이어폭스 */
 
 }
 
