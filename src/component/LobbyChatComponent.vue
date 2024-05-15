@@ -50,7 +50,7 @@ export default {
     },
     data() {
         return {
-            totalH: 0,
+            lastH: 0,
             vh: useVhStore().vh,
             modal_type_chat: true,
             modal_type_people: false,
@@ -83,6 +83,7 @@ export default {
         // window.addEventListener("scroll", (e) => {e.preventDefault(); console.log("gggg")});
 
         // this.stand = window.scrollY;
+        this.lastH = window.pageYOffset;
         window.addEventListener("scroll", this.handle_scroll);
 
         // window.visualViewport.onresize = () => {
@@ -102,7 +103,18 @@ export default {
             // let documentHeight = document.documentElement.clientHeight;
             // let viewportHeight = window.visualViewport.height;
             // let keyboardHeight = documentHeight - viewportHeight + 1;
-            document.getElementById('lobby_chat_content_container').style.bottom = (document.documentElement.clientHeight == window.visualViewport.height) ? 0 : (document.documentElement.clientHeight-window.visualViewport.height) + 'px'
+            // document.getElementById('lobby_chat_content_container').style.bottom = (document.documentElement.clientHeight == window.visualViewport.height) ? 0 : (document.documentElement.clientHeight-window.visualViewport.height) + 'px'
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let chat_container = document.getElementById('lobby_chat_content_container');
+            if (currentScrollTop > this.lastH) {
+                console.log('스크롤이 아래로 내려갑니다.');
+                chat_container.style.bottom = 0;
+            } else {
+                console.log('스크롤이 위로 올라갑니다.');
+                chat_container.style.bottom = (document.documentElement.clientHeight-window.visualViewport.height) + 'px';
+            }
+
+            this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
         },
         modal_chat() {
             this.modal_type_chat = true;
@@ -124,7 +136,7 @@ export default {
             //     useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
             //     document.querySelector("body").style.height = window.visualViewport.height + 'px';
             //     document.querySelector("body").style.overflow = "hidden"
-                
+
             // }, 500)
         },
         setVhOut() {
