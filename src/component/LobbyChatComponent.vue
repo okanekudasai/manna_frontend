@@ -79,6 +79,9 @@ export default {
         this.$refs.send_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
         this.$refs.attach_button.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px";
 
+        window.visualViewport.onresize = () => {
+            console.log("바뀜!!!");
+        }
     },
     methods: {
         close_modal() {
@@ -100,27 +103,14 @@ export default {
             this.$refs.lobby_chat_textarea.style.height = this.$refs.lobby_chat_textarea.scrollHeight + "px"
         },
         setVhIn() {
-            window.addEventListener('scroll', function () {
-                var scrollPosition = window.scrollY || window.pageYOffset;
-                var fixedElement = document.querySelector('.scroll-content');
-
-                if (scrollPosition > 0) {
-                    fixedElement.style.position = 'fixed';
-                    fixedElement.style.top = '0';
-                    // 필요에 따라 다른 스타일링 추가
-                } else {
-                    fixedElement.style.position = 'relative';
-                    // 필요에 따라 다른 스타일링 추가
-                }
-            });
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
                 document.querySelector("body").style.height = window.visualViewport.height + 'px';
                 document.querySelector("body").style.overflow = "hidden"
+                
             }, 500)
         },
         setVhOut() {
-            window.removeEventListener('scroll');
             setTimeout(() => {
                 useVhStore().vh = window.visualViewport.height * 0.01 + 'px';
             }, 500)
