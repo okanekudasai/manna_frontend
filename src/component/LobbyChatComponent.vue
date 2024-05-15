@@ -93,7 +93,7 @@ export default {
             console.log("화면높이 " + viewportHeight);
             this.vh = (viewportHeight * 0.01) + "px";
             document.querySelector("body").style.height = viewportHeight + 'px';
-            
+            document.querySelector("body").style.overflow = "hidden";
 
         },
         close_modal() {
