@@ -56,6 +56,7 @@ export default {
             modal_type_people: false,
             input_lobby_chat: '',
             stand: 0,
+            touch_start: 0,
         }
     },
     components: {
@@ -87,6 +88,29 @@ export default {
         // window.addEventListener("scroll", this.handle_scroll);
 
         window.addEventListener("wheel", this.handle_scroll);
+        window.addEventListener("touchstart", (e) => {
+            this.touch_start = e.touches[0].clientY;
+        })
+        window.addEventListener('touchmove', function (event) {
+            if (currentScrollTop > this.lastH) {
+                console.log('스크롤이 아래로 내려갑니다.');
+                chat_container.style.bottom = 0;
+                this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
+            } else if (currentScrollTop < this.lastH) {
+                console.log('스크롤이 위로 올라갑니다.');
+                chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
+                this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
+            } else {
+                let currentY = event.touches[0].clientY;
+                if (currentY > this.touch_start) {
+                    console.log('터치드래그 방향: 아래로');
+                    chat_container.style.bottom = 0;
+                } else if (currentY < this.touch_start) {
+                    console.log('터치드래그 방향: 위로');
+                    chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
+                }
+            }
+        });
 
         // window.visualViewport.onresize = () => {
         //     this.changeHeight();
