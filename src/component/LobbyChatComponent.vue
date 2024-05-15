@@ -69,7 +69,7 @@ export default {
     },
     mounted() {
         useVhStore().$subscribe((mutation, state) => {
-            console.log("vh가 바꼈는걸 감지" + this.vh  + "-." + useVhStore().vh);
+            console.log("vh가 바꼈는걸 감지" + this.vh  + "-." + useVhStore().vh + "  :   " +state);
             // this.vh = useVhStore().vh;
         });
 
