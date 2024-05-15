@@ -92,22 +92,28 @@ export default {
             this.touch_start = e.touches[0].clientY;
         })
         window.addEventListener('touchmove', function (event) {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let chat_container = document.getElementById('lobby_chat_content_container');
             if (currentScrollTop > this.lastH) {
                 console.log('스크롤이 아래로 내려갑니다.');
                 chat_container.style.bottom = 0;
                 this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
+                document.querySelector("#waiting_people_box").style.transfrom = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
             } else if (currentScrollTop < this.lastH) {
                 console.log('스크롤이 위로 올라갑니다.');
                 chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
                 this.lastH = currentScrollTop <= 0 ? 0 : currentScrollTop;
+                document.querySelector("#waiting_people_box").style.transfrom = 0;
             } else {
                 let currentY = event.touches[0].clientY;
                 if (currentY > this.touch_start) {
                     console.log('터치드래그 방향: 아래로');
                     chat_container.style.bottom = 0;
+                    document.querySelector("#waiting_people_box").style.transfrom = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
                 } else if (currentY < this.touch_start) {
                     console.log('터치드래그 방향: 위로');
                     chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
+                    document.querySelector("#waiting_people_box").style.transfrom = 0;
                 }
             }
         });
