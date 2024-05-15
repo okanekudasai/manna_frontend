@@ -34,7 +34,7 @@ export default {
         console.log(test);
 
         
-        this.setScreenSize();
+        this.vhStore.vh = window.innerHeight * 0.01 + 'px';
         window.addEventListener('resize', this.setScreenSize);
     },
     
@@ -54,8 +54,8 @@ export default {
             useVhStore().vh = (viewportHeight * 0.01) + "px";
         },
         setScreenSize() {
-            console.log("스크린사이즈도 바뀜");
             if (window.innerHeight != window.visualViewport.height) return;
+            console.log("스크린사이즈도 바뀜");
             this.vhStore.vh = window.innerHeight * 0.01 + 'px';
         }
     },
