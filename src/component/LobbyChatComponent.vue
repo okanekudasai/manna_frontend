@@ -88,27 +88,23 @@ export default {
         // window.addEventListener("scroll", this.handle_scroll);
 
         window.addEventListener("scroll", this.handle_scroll);
-        window.addEventListener("wheel", (e) => {
-            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            let chat_container = document.getElementById('lobby_chat_content_container');
-            if (currentScrollTop == this.lastH) {
-                if (e.deltaY > 0) {
-                    console.log('휠 방향: 아래로');
-                    chat_container.style.bottom = 0;
-                    document.querySelector("#waiting_people_box").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
-                    document.querySelector("#profile_notification_container").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
-                } else if (e.deltaY < 0) {
-                    console.log('휠 방향: 위로');
-                    chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
-                    document.querySelector("#waiting_people_box").style.transform = '';
-                    document.querySelector("#profile_notification_container").style.transform = '';
-                }
-            }
-        });
-        window.addEventListener("touchstart", (e) => {
+        window.addEventListener("wheel", this.handle_wheel);
+        window.addEventListener("touchstart", this.handle_start_touch)
+        window.addEventListener('touchmove', this.handle_touch_direction);
+
+        // window.visualViewport.onresize = () => {
+        //     this.changeHeight();
+        // }
+    },
+    methods: {
+        handle_start_touch(e) {
+            console.log(e);
             this.touch_start = e.touches[0].clientY;
-        })
-        window.addEventListener('touchmove', function (event) {
+        }
+
+        ,
+        handle_touch_direction(event) {
+            console.log(event)
             let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
             let chat_container = document.getElementById('lobby_chat_content_container');
             console.log(this.touch_start, event.touches[0].clientY);
@@ -128,19 +124,35 @@ export default {
                     document.querySelector("#profile_notification_container").style.transform = '';
                 }
             }
-        });
+        },
+        handle_wheel(e) {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let chat_container = document.getElementById('lobby_chat_content_container');
+            if (currentScrollTop == this.lastH) {
+                if (e.deltaY > 0) {
+                    console.log('휠 방향: 아래로');
+                    chat_container.style.bottom = 0;
+                    document.querySelector("#waiting_people_box").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
+                    document.querySelector("#profile_notification_container").style.transform = `translateY(${document.documentElement.clientHeight - window.visualViewport.height}px)`;
+                } else if (e.deltaY < 0) {
+                    console.log('휠 방향: 위로');
+                    chat_container.style.bottom = (document.documentElement.clientHeight - window.visualViewport.height) + 'px';
+                    document.querySelector("#waiting_people_box").style.transform = '';
+                    document.querySelector("#profile_notification_container").style.transform = '';
+                }
+            }
+        }
 
-        // window.visualViewport.onresize = () => {
-        //     this.changeHeight();
-        // }
-    },
-    methods: {
+        },
         close_modal() {
             this.$emit('close_lobby_chat_modal');
             document.getElementById('lobby_chat_content_container').style.bottom = 0;
             document.querySelector("#waiting_people_box").style.transform = '';
             document.querySelector("#profile_notification_container").style.transform = '';
             window.removeEventListener("scroll", this.handle_scroll)
+            window.removeEventListener("wheel", this.handle_wheel)
+            window.removeEventListener("touchstart", this.handle_start_touch)
+            window.removeEventListener("touchmove", this.handle_touch_direction)
         },
         handle_scroll(e) {
             console.log("!!!!!" + e)
